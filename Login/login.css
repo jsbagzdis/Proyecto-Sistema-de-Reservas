@@ -1,0 +1,191 @@
+* {
+    box-sizing: border-box;
+    margin: 0; /* Cambiado: el margin auto global puede causar conflictos */
+    padding: 0;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    /* Degradado corregido para que se vea fluido */
+    background: linear-gradient(250deg, rgba(255, 166, 2, 1), rgba(255, 255, 255, 1), rgb(20, 5, 231));
+    background-size: cover; /* Asegura que el fondo cubra toda la pantalla */
+    min-height: 100vh; /* Asegura que el fondo cubra toda la altura de la ventana */
+
+    display: flex; /* Usamos flexbox para centrar el contenido */
+    flex-direction: column; /* Hace que el logo y la login card esten centrados */
+    justify-content: center; /* Esto hace que lo detallado en el body se centre verticalmente */
+    align-items: center;     /* Esto hace que lo detallado en el body se centre de manera horizontal */
+    color: white;
+    padding: 20px;
+}
+
+.logo {
+    /* Eliminamos absolute y márgenes gigantes */
+    display: block; /* Asegura que el logo se comporte como un bloque para centrarlo correctamente */
+    width: 100%;/* Hace que el logo sea responsivo */
+    max-width: 300px; /* Tamaño máximo razonable */
+    margin-bottom: 10px; /* Espacio entre logo y tarjeta */
+    height: auto;/* Mantiene la proporción del logo */
+}
+
+.login-card {
+    /* Eliminamos position absolute para que el flexbox del body haga el trabajo */
+    background: rgba(20, 20, 19, 0.45);
+    padding: 35px;
+    width: 100%;
+    max-width: 360px; /* Se ajusta solo en móviles */
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 18px;
+    
+    text-align: center;
+}
+
+.login-card h1 {
+    margin-bottom: 10px;
+    font-size: 32px;
+    
+}
+
+.login-card p {
+    margin-bottom: 22px;
+    color: rgba(255, 255, 255, 0.85);
+}
+
+label {
+    display: block;
+    text-align: left; /* Etiquetas alineadas a la izquierda */
+    margin-top: 15px;/* Espacio entre campos */
+    margin-bottom: 5px;/* Espacio entre etiqueta y campo */
+}
+
+input {
+    width: 100%;
+    padding: 12px; /* Un poco más de espacio para clicks fáciles */
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 10px;
+    background: rgba(255, 255, 255, 0.2); 
+    color: rgb(10, 10, 10);
+    background-color: rgba(255, 255, 255, 0.781);
+    outline: none; /* Elimina el borde azul al hacer click */
+}
+
+input::placeholder { /* Texto dentro de casillas registro*/
+    color: rgb(109, 108, 108);
+    text-shadow: 2px rgb(0, 0, 0);
+}
+
+/* Estilo para los botones, INGRESAR */
+button {
+
+    margin-top: 20px;
+    width: 100%;
+    padding: 15px;
+    border: none;/* Elimina el borde predeterminado */
+    border-radius: 8px;
+    font-size: 15px;/* Tamaño de fuente legible */
+    font-weight: bold;/* Negrita para destacar el botón */
+    cursor: pointer;
+    
+}
+
+.btn-ingresar{
+     background: linear-gradient(10deg, rgb(5, 5, 255), rgb(14, 14, 14), rgb(17, 0, 255));
+    color: #ffffff; /*Color de la fuente*/
+    border: 1px solid #000000;/*Color del borde*/
+}
+
+.btn-ingresar:hover {
+    background:  #1a0494e7;
+    transform: translateY(-2px);/* Agrega un pequeño movimiento hacia arriba para dar feedback visual */
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);/* Agrega una sombra para dar un efecto de profundidad al hacer hover */
+}
+    
+/* Botón de registro diferente para que no se confunda */
+.btn-registrar {
+    
+    border: 2px solid #ffdd00;
+    color: #000000;
+    background-color: rgba(251, 255, 0, 0.169);
+    margin-top: 10px;
+}
+
+.btn-registrar:hover {
+    background: #d6ad0be7;
+    border: 2px solid #000000;
+    color: #000000;
+    transform: translateY(-2px);/* Agrega un pequeño movimiento hacia arriba para dar feedback visual */
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);/* Agrega una sombra para dar un efecto de profundidad al hacer hover */
+}
+
+
+#mensaje {
+    margin-top: 22px;
+    margin-bottom: 0ch;
+    padding: 15px 20px; /* Un poco más de padding lateral para el icono */
+    border-radius: 6px; /* Bordes ligeramente más rectos, como en la referencia */
+    font-size: 14px;
+    font-weight: 500; /* Texto más fino, como en la referencia */
+    
+    /* El truco del icono: un pseudo-elemento ::before */
+    display: none; /* Se oculta por defecto */
+    position: relative; /* Para posicionar el icono */
+    padding-left: 55px; /* Espacio reservado para el icono */
+    text-align: left; /* Texto alineado a la izquierda */
+    color: #ffffff; /* Texto siempre blanco */
+}
+
+/* Estado de ERROR*/
+.error {
+    display: block !important;
+    background-color: #c81e1e; 
+}
+
+/* Icono de advertencia circular rojo para ERROR */
+.error::before {
+    content: "!"; /* Símbolo dentro del círculo */
+    position: absolute;
+    left: 15px; /* Posición del icono */
+    top: 50%;
+    transform: translateY(-50%); /* Centrado vertical */
+    
+    width: 26px; /* Tamaño del círculo */
+    height: 26px;
+    background-color: transparent; /* Fondo transparente para el círculo */
+    border: 2px solid #ffffff; /* Borde circular blanco */
+    border-radius: 50%; /* Es un círculo */
+    
+    /* Estilo del "!" */
+    color: #ffffff; 
+    font-weight: bold;
+    font-size: 18px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Estado de ÉXITO:*/
+.correcto {
+    display: block !important;
+    background-color: #0e9f6e; 
+}
+
+/* Icono circular con tilde para ÉXITO */
+.correcto::before {
+    content: "✓"; /* Usamos un símbolo de tilde */
+    position: absolute;
+    left: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    
+    width: 26px;
+    height: 26px;
+    border: 2px solid #ffffff;
+    border-radius: 50%;
+    
+    color: #ffffff;
+    font-weight: bold;
+    font-size: 18px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

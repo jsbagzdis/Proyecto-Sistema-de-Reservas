@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="registro.css">
+   
+    <title>Registro de Usuario</title>
+</head>
+<body>
+
+    <img src="Logo-SistemaReservas.png" alt="Logo" class="logo">
+    <div class="registro-card">
+        <h1>Registro de Usuario</h1>
+        <p>Complete el formulario para registrarse!!</p>
+
+         <form id="registroForm">
+
+        <label>Nombre</label>
+        <input type="text" id="nombre" placeholder="Ingresa tu nombre completo...">
+
+        <label>Usuario</label>
+        <input type="text" id="usuario" placeholder="Ingresa tu usuario...">
+
+        <label>Correo Electrónico</label>
+        <input type="email" id="correo" placeholder="Ingresa tu correo electrónico...">
+
+        <label>Contraseña</label>
+        <input autocomplete="current-password" type="password" id="password"  placeholder="Ingresa tu contraseña...">
+
+        <p id="mensajeRegistro"></p>
+
+        <!-- REGISTRO -->
+        <button type="submit">Registrarse</button>
+
+        <!-- VOLVER AL LOGIN -->
+        <button type="button" onclick="irALogin()">Volver al Login</button>
+    </form>   
+    </div>
+
+     <script src="registro.js"></script>
+
+</body>
+</html>

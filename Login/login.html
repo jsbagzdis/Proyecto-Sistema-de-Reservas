@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="login.css">
+   
+    <title>Login</title>
+</head>
+<body>
+
+<img src="Logo-SistemaReservas.png" alt="Logo" class="logo">
+
+<div class="login-card">
+    <h1>Iniciar Sesión</h1>
+    <p>Accede con tu usuario y contraseña</p>
+
+    <form id="loginForm">
+
+        <label>Usuario</label>
+        <input type="text" id="usuario" placeholder="Ingresa tu usuario...">
+
+        <label>Contraseña</label>
+        <input autocomplete="current-password" type="password" id="password" placeholder="Ingresa tu contraseña...">
+
+        <p id="mensaje"></p>
+
+        <!-- LOGIN -->
+        <button type="submit" class="btn-ingresar">Ingresar</button>
+
+        <!-- REGISTRO -->
+        <button type="button" class="btn-registrar" onclick="irARegistro()">Registrarse</button>
+
+    </form>
+</div>
+ <script src="login.js"></script>
+</body>
+</html>
