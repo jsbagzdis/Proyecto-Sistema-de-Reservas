@@ -33,7 +33,7 @@ form.addEventListener("submit", function(e) {
   sessionStorage.setItem("usuarioLogueado", JSON.stringify(usuarioEncontrado));
 
 setTimeout(() => {
-      window.location.href = "../Menu/main.html";
+      window.location.href = "../Reserva/reserva.html";
     }, 1000);
   } else{
     msg.textContent = "Usuario o contraseña incorrectos";

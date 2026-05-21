@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="reserva.css">
+    <title>Sistema de Reservas</title>
+</head>
+<body>
+    <div class="todo">
+        <div class="encabezado">
+            <h1>NUEVA RESERVA</h1>
+            <p>Seleccioná fecha, deporte y horario para tu partido</p>
+        </div>
+
+        <form id="formularioForm">
+            <label for="deporte">Deporte</label>
+            <select id="deporte">
+                <option value="" disabled selected>Seleccione un deporte...</option>
+                <option value="Fútbol">Fútbol</option>
+                <option value="Tenis">Tenis</option>
+                <option value="Pádel">Pádel</option>
+                <option value="Básquet">Básquet</option>
+            </select>
+
+            <label for="fecha">Fecha</label>
+            <input type="date" id="fecha">
+
+            <label for="horario">Horario</label>
+            <input type="time" id="horario">
+
+            <label for="duracion">Duración</label>
+            <select id="duracion">
+                <option value="" disabled selected>Seleccione la duración...</option>
+                <option value="1">1 hs</option>
+                <option value="1.5">1:30 hs</option>
+                <option value="2">2 hs</option>
+            </select>
+
+            <button type="button" id="btnEnviar">Enviar</button>
+            
+            <p id="mensaje"></p>
+        </form>
+
+        <div class="ListaReservas" id="contenedorTurnos">
+            <h2>Turnos Disponibles</h2>
+            </div>
+    </div>
+
+    <script src="reserva.js"></script>
+</body>
+</html>

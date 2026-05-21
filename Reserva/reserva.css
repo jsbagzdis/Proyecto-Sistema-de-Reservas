@@ -1,0 +1,164 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #001d2e 0%, #003049 40%, #ffffff 70%, #ff9100 100%);
+    background-attachment: fixed;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.encabezado {
+    width: 100%;
+    background-color: transparent;
+    color: white;
+    padding: 60px 20px;
+    text-align: center;
+}
+
+.encabezado h1 {
+    font-size: 2.5rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    text-shadow: 2px 2px 5px rgba(0,0,0,0.4);
+}
+
+.encabezado p {
+    font-weight: 300;
+    opacity: 0.9;
+    margin-top: 5px;
+}
+
+.todo {
+    width: 90%;
+    max-width: 500px;
+    padding-bottom: 60px;
+}
+
+#formularioForm {
+    background: rgba(255, 255, 255, 0.95);
+    padding: 35px;
+    border-radius: 20px;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+    margin-top: -20px;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+label {
+    font-weight: 700;
+    color: #003049;
+    margin-top: 18px;
+    display: block;
+    font-size: 13px;
+    text-transform: uppercase;
+}
+
+input, select {
+    width: 100%;
+    padding: 12px;
+    margin: 8px 0 5px 0;
+    border: 2px solid #e0e0e0;
+    border-radius: 10px;
+    font-size: 16px;
+    background-color: #fff;
+    transition: all 0.3s ease;
+    box-sizing: border-box;
+}
+
+input:focus, select:focus {
+    outline: none;
+    border-color: #003049;
+    box-shadow: 0 0 8px rgba(0, 48, 73, 0.2);
+}
+
+#btnEnviar {
+    display: block;
+    width: 100%;
+    background: #003049;
+    color: white;
+    border: none;
+    padding: 15px;
+    margin-top: 30px;
+    border-radius: 10px;
+    font-weight: 800;
+    font-size: 18px;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 6px 15px rgba(0, 48, 73, 0.3);
+    box-sizing: border-box;
+}
+
+#btnEnviar:hover {
+    transform: translateY(-2px);
+    background: #004163;
+    box-shadow: 0 8px 20px rgba(0, 48, 73, 0.4);
+}
+
+#mensaje {
+    margin-top: 20px;
+    text-align: center;
+    font-weight: bold;
+    font-size: 14px;
+    padding: 12px;
+    border-radius: 10px;
+    min-height: 20px;
+}
+
+.msj-rojo {
+    color: #b91c1c;
+    background-color: #fef2f2;
+    border: 1px solid #fee2e2;
+}
+
+.msj-verde {
+    color: #15803d;
+    background-color: #f0fdf4;
+    border: 1px solid #dcfce7;
+}
+
+.input-error {
+    border: 2px solid #ef4444 !important;
+}
+
+.ListaReservas {
+    margin-top: 45px;
+    background: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(10px);
+    padding: 25px;
+    border-radius: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.ListaReservas h2 {
+    color: #003049;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.turno-item {
+    background: white;
+    padding: 18px;
+    margin-bottom: 15px;
+    border-radius: 12px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-left: 6px solid #ff9100;
+}
+
+.btnReservarItem {
+    background-color: #28a745;
+    color: white;
+    border: none;
+    padding: 10px 18px;
+    border-radius: 8px;
+    font-weight: bold;
+    cursor: pointer;
+}
