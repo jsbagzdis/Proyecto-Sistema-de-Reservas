@@ -1,39 +1,36 @@
 * {
     box-sizing: border-box;
-    margin: 0; /* Cambiado: el margin auto global puede causar conflictos */
+    margin: 0; 
     padding: 0;
 }
 
 body {
     font-family: Arial, sans-serif;
-    /* Degradado corregido para que se vea fluido */
+   
     background: linear-gradient(250deg, rgba(255, 166, 2, 1), rgba(255, 255, 255, 1), rgb(20, 5, 231));
     background-size: cover;
     min-height: 100vh;
 
     display: flex;
-    flex-direction: column; /* Hace que el logo y la login card esten centrados */
-    justify-content: center; /* Esto hace que lo detallado en el body se centre verticalmente */
-    align-items: center;     /* Esto hace que lo detallado en el body se centre de manera horizontal */
-    color: white;
+    flex-direction: column; 
+    justify-content: center; 
+    align-items: center;     
     padding: 20px;
 }
 
 .logo {
-    /* Eliminamos absolute y márgenes gigantes */
     display: block;
     width: 100%;
-    max-width: 300px; /* Tamaño máximo razonable */
-    margin-bottom: 10px; /* Espacio entre logo y tarjeta */
+    max-width: 300px;
+    margin-bottom: 10px;
     height: auto;
 }
 
 .registro-card {
-    /* Eliminamos position absolute para que el flexbox del body haga el trabajo */
     background: rgba(13, 11, 11, 0.45);
     padding: 35px;
     width: 100%;
-    max-width: 360px; /* Se ajusta solo en móviles */
+    max-width: 360px; 
     border: 0.5px solid rgb(14, 2, 77);
     border-radius: 15px;
     
@@ -54,22 +51,22 @@ body {
 
 label {
     display: block;
-    text-align: left; /* Etiquetas alineadas a la izquierda */
+    text-align: left;
     margin-top: 15px;
     margin-bottom: 5px;
 }
 
 input {
     width: 100%;
-    padding: 12px; /* Un poco más de espacio para clicks fáciles */
+    padding: 12px;
     border: 1px solid rgba(0, 0, 0, 0.612);
     border-radius: 8px;
     color: rgb(0, 0, 0);
     background-color: hsl(0, 0%, 96%);
-    outline: none; /* Elimina el borde azul al hacer click */
+    outline: none; 
 }
 
-input::placeholder { /* Texto dentro de casillas registro*/
+input::placeholder { 
     color: rgb(109, 108, 108);
     text-shadow: 2px rgb(0, 0, 0);
 }
@@ -83,8 +80,8 @@ button {
     border: none;
     border-radius: 8px;
     background: rgb(63, 38, 252);
-    color: #f5eded; /*Color de la fuente*/
-    border: 1px solid #000000;/*Color del borde*/
+    color: #f5eded;
+    border: 1px solid #000000;
     font-size: 15px;
     font-weight: bold;
     cursor: pointer;
@@ -97,7 +94,7 @@ button:hover {
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
 }
 
-/* Botón de registro diferente para que no se confunda */
+
 button:last-child {
     
     border: 1px solid #121111;
@@ -112,16 +109,16 @@ button:last-child {
     padding: 14px;
     border-radius: 8px;
     font-size: 15px;
-    font-weight: bold; /* Un poco menos que bold (700) para más elegancia */
+    font-weight: bold;
     text-align: center;
-    display: none; /* Se oculta por defecto hasta que JS le ponga una clase */
+    display: none; 
     border: 1px solid rgba(0, 0, 0, 0.884);
 }
 /* ERROR */
 .error {
     display : block !important;
-    background-color: #fde8e8; /* Fondo rosado muy suave */
-    color: #9b1c1c !important;            /* Texto rojo oscuro bordó */
+    background-color: #fde8e8;
+    color: #9b1c1c !important;           
 }
 
 /* ÉXITO */

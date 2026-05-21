@@ -10,7 +10,7 @@ form.addEventListener("submit", function(e) {
   const msg = document.getElementById("mensaje");
 
   // 1. Obtener los usuarios de localStorage (o un array vacío si no hay ninguno)
-    // Buscamos la clave 'usuarios', si no existe, devolvemos []
+   
   const usuariosRegistrados = JSON.parse(localStorage.getItem("usuarios")) || [];
 
 
@@ -24,12 +24,12 @@ form.addEventListener("submit", function(e) {
   // 3. Buscar el usuario en la lista
   const usuarioEncontrado = usuariosRegistrados.find(u => u.usuario === userIngresado && u.password === passIngresada);
 
-  // 4. Lógica de acceso
+  // 4. Si se encuentra el usuario, mostrar mensaje de bienvenida
   if (usuarioEncontrado) {
     msg.textContent = `Bienvenido, ${usuarioEncontrado.nombre}!`;
     msg.className = "correcto";
 
-  // Guardamos quién entró para usarlo en el menú principal
+  // Guardamos quién entró para usarlo en el menú
   sessionStorage.setItem("usuarioLogueado", JSON.stringify(usuarioEncontrado));
 
 setTimeout(() => {
@@ -41,7 +41,6 @@ setTimeout(() => {
   }
   });
 
-// Ir a registro
 function irARegistro() {
   window.location.href = "../Registro/registro.html";
 }

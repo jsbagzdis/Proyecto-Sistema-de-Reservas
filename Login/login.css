@@ -1,39 +1,39 @@
 * {
     box-sizing: border-box;
-    margin: 0; /* Cambiado: el margin auto global puede causar conflictos */
+    margin: 0; 
     padding: 0;
 }
 
 body {
     font-family: Arial, sans-serif;
-    /* Degradado corregido para que se vea fluido */
+  
     background: linear-gradient(250deg, rgba(255, 166, 2, 1), rgba(255, 255, 255, 1), rgb(20, 5, 231));
     background-size: cover; /* Asegura que el fondo cubra toda la pantalla */
     min-height: 100vh; /* Asegura que el fondo cubra toda la altura de la ventana */
 
-    display: flex; /* Usamos flexbox para centrar el contenido */
+    display: flex; /* Centrar el contenido */
     flex-direction: column; /* Hace que el logo y la login card esten centrados */
-    justify-content: center; /* Esto hace que lo detallado en el body se centre verticalmente */
-    align-items: center;     /* Esto hace que lo detallado en el body se centre de manera horizontal */
+    justify-content: center; /* Esto hace que lo que esta en el body se centre verticalmente */
+    align-items: center;     /* Esto hace que lo que esta en el body se centre de forma horizontal */
     color: white;
     padding: 20px;
 }
 
 .logo {
-    /* Eliminamos absolute y márgenes gigantes */
-    display: block; /* Asegura que el logo se comporte como un bloque para centrarlo correctamente */
-    width: 100%;/* Hace que el logo sea responsivo */
-    max-width: 300px; /* Tamaño máximo razonable */
+    
+    display: block; /* El logo se comporta como un bloque */
+    width: 100%;/* Hace que el logo sea responsive*/
+    max-width: 300px; /* Tamaño máximo */
     margin-bottom: 10px; /* Espacio entre logo y tarjeta */
     height: auto;/* Mantiene la proporción del logo */
 }
 
 .login-card {
-    /* Eliminamos position absolute para que el flexbox del body haga el trabajo */
+  
     background: rgba(20, 20, 19, 0.45);
     padding: 35px;
     width: 100%;
-    max-width: 360px; /* Se ajusta solo en móviles */
+    max-width: 360px; 
     border: 1px solid rgba(255, 255, 255, 0.2);
     border-radius: 18px;
     
@@ -53,14 +53,14 @@ body {
 
 label {
     display: block;
-    text-align: left; /* Etiquetas alineadas a la izquierda */
+    text-align: left; /* Labels alineados a la izquierda */
     margin-top: 15px;/* Espacio entre campos */
-    margin-bottom: 5px;/* Espacio entre etiqueta y campo */
+    margin-bottom: 5px;/* Espacio entre label y campo */
 }
 
 input {
     width: 100%;
-    padding: 12px; /* Un poco más de espacio para clicks fáciles */
+    padding: 12px; 
     border: 1px solid rgba(255, 255, 255, 0.3);
     border-radius: 10px;
     background: rgba(255, 255, 255, 0.2); 
@@ -82,25 +82,24 @@ button {
     padding: 15px;
     border: none;/* Elimina el borde predeterminado */
     border-radius: 8px;
-    font-size: 15px;/* Tamaño de fuente legible */
-    font-weight: bold;/* Negrita para destacar el botón */
+    font-size: 15px;
+    font-weight: bold;
     cursor: pointer;
     
 }
 
 .btn-ingresar{
      background: linear-gradient(10deg, rgb(5, 5, 255), rgb(14, 14, 14), rgb(17, 0, 255));
-    color: #ffffff; /*Color de la fuente*/
-    border: 1px solid #000000;/*Color del borde*/
+    color: #ffffff; 
+    border: 1px solid #000000;
 }
 
 .btn-ingresar:hover {
     background:  #1a0494e7;
-    transform: translateY(-2px);/* Agrega un pequeño movimiento hacia arriba para dar feedback visual */
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);/* Agrega una sombra para dar un efecto de profundidad al hacer hover */
+    transform: translateY(-2px);/* Agrega un pequeño movimiento hacia arriba */
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);/* Agrega una sombra */
 }
     
-/* Botón de registro diferente para que no se confunda */
 .btn-registrar {
     
     border: 2px solid #ffdd00;
@@ -113,25 +112,25 @@ button {
     background: #d6ad0be7;
     border: 2px solid #000000;
     color: #000000;
-    transform: translateY(-2px);/* Agrega un pequeño movimiento hacia arriba para dar feedback visual */
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);/* Agrega una sombra para dar un efecto de profundidad al hacer hover */
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
 }
 
 
 #mensaje {
     margin-top: 22px;
     margin-bottom: 0ch;
-    padding: 15px 20px; /* Un poco más de padding lateral para el icono */
-    border-radius: 6px; /* Bordes ligeramente más rectos, como en la referencia */
+    padding: 15px 20px; 
+    border-radius: 6px; 
     font-size: 14px;
-    font-weight: 500; /* Texto más fino, como en la referencia */
+    font-weight: 500; 
     
-    /* El truco del icono: un pseudo-elemento ::before */
-    display: none; /* Se oculta por defecto */
-    position: relative; /* Para posicionar el icono */
-    padding-left: 55px; /* Espacio reservado para el icono */
-    text-align: left; /* Texto alineado a la izquierda */
-    color: #ffffff; /* Texto siempre blanco */
+   
+    display: none;
+    position: relative; 
+    padding-left: 55px; 
+    text-align: left; 
+    color: #ffffff; 
 }
 
 /* Estado de ERROR*/
@@ -140,19 +139,19 @@ button {
     background-color: #c81e1e; 
 }
 
-/* Icono de advertencia circular rojo para ERROR */
+/* Icono de Error */
 .error::before {
     content: "!"; /* Símbolo dentro del círculo */
     position: absolute;
-    left: 15px; /* Posición del icono */
+    left: 15px; /* Posición */
     top: 50%;
-    transform: translateY(-50%); /* Centrado vertical */
+    transform: translateY(-50%); 
     
     width: 26px; /* Tamaño del círculo */
     height: 26px;
-    background-color: transparent; /* Fondo transparente para el círculo */
-    border: 2px solid #ffffff; /* Borde circular blanco */
-    border-radius: 50%; /* Es un círculo */
+    background-color: transparent; 
+    border: 2px solid #ffffff;
+    border-radius: 50%; 
     
     /* Estilo del "!" */
     color: #ffffff; 
@@ -163,7 +162,7 @@ button {
     align-items: center;
 }
 
-/* Estado de ÉXITO:*/
+/*ÉXITO*/
 .correcto {
     display: block !important;
     background-color: #0e9f6e; 
@@ -171,7 +170,7 @@ button {
 
 /* Icono circular con tilde para ÉXITO */
 .correcto::before {
-    content: "✓"; /* Usamos un símbolo de tilde */
+    content: "✓"; 
     position: absolute;
     left: 15px;
     top: 50%;

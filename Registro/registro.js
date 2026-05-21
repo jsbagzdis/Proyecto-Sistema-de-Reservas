@@ -9,7 +9,7 @@ form.addEventListener("submit", function(e) {
     const password = document.getElementById("password").value.trim();
     const msg = document.getElementById("mensajeRegistro");
 
-    // --- SECCIÓN DE VALIDACIONES ---
+
 
     // A. Validar campos vacíos
     if (!name || !email || !user || !password) {
@@ -26,7 +26,7 @@ form.addEventListener("submit", function(e) {
         return;
     }
 
-    // C. Validar largo de contraseña (mínimo 6 caracteres)
+    // C. Validar largo de contraseña
     if (password.length < 6) {
         msg.textContent = "La contraseña debe tener al menos 6 caracteres";
         msg.className = "error";
@@ -50,7 +50,7 @@ form.addEventListener("submit", function(e) {
         return;
     }
 
-    // 3. Crear el nuevo objeto usuario y agregarlo al array
+    // 3. Crear el nuevo objeto usuario y agregarlo 
     const nuevoUsuario = {
         nombre: name,
         usuario: user,
@@ -59,19 +59,18 @@ form.addEventListener("submit", function(e) {
     };
     usuarios.push(nuevoUsuario);
 
-    // 4. Guardar el array actualizado en LocalStorage
+    // 4. Guardar en LocalStorage
     localStorage.setItem("usuarios", JSON.stringify(usuarios));
 
     msg.textContent = "Registro exitoso. Ahora puedes iniciar sesión.";
     msg.className = "correcto";
 
-    // Redirigir a login después de un breve mensaje
+    
 setTimeout(() => {  
     window.location.href = "../Login/login.html";
 }, 1500);
 });
 
-// Función para el botón "Volver al Login"
 function irALogin() {
     window.location.href = "../Login/login.html";
 }
