@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="reserva.css">
+    <link rel="stylesheet" href="../Css/reserva.css">
     <title>Sistema de Reservas</title>
 </head>
 <body>
@@ -14,13 +14,9 @@
         </div>
 
         <form id="formularioForm">
-            <label for="deporte">Deporte</label>
-            <select id="deporte">
-                <option value="" disabled selected>Seleccione un deporte...</option>
-                <option value="Fútbol">Fútbol</option>
-                <option value="Tenis">Tenis</option>
-                <option value="Pádel">Pádel</option>
-                <option value="Básquet">Básquet</option>
+            <label for="canchaSelect">Cancha Disponible</label>
+            <select id="canchaSelect">
+                <option value="" disbled selected>Cargando canchas desde el sistema...</option>
             </select>
 
             <label for="fecha">Fecha</label>
@@ -32,9 +28,9 @@
             <label for="duracion">Duración</label>
             <select id="duracion">
                 <option value="" disabled selected>Seleccione la duración...</option>
-                <option value="1">1 hs</option>
-                <option value="1.5">1:30 hs</option>
-                <option value="2">2 hs</option>
+                <option value="60">1 hs</option>
+                <option value="90">1:30 hs</option>
+                <option value="120">2 hs</option>
             </select>
 
             <button type="button" id="btnEnviar">Enviar</button>
@@ -47,6 +43,6 @@
             </div>
     </div>
 
-    <script src="reserva.js"></script>
+    <script src="../JavaScript/reserva.js"></script>
 </body>
 </html>

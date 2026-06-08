@@ -67,11 +67,11 @@ form.addEventListener("submit", function(e) {
 
     
 setTimeout(() => {  
-    window.location.href = "../Login/login.html";
+    window.location.href = "../Html/login.html";
 }, 1500);
 });
 
 function irALogin() {
-    window.location.href = "../Login/login.html";
+    window.location.href = "../Html/login.html";
 }
 
