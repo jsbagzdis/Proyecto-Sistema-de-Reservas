@@ -1,14 +1,15 @@
-const mongoose = require('node:mongoose');
+const { DataTypes } = require('sequelize');
+const sequelize = require('../Config/db');
 
-const CanchaSchema = new mongoose.Schema({
-    nombre: { type: String, required: true },
-    deporte: {
-        type: String,
-        enum: ['futbol', 'tenis', 'padel', 'basquetbol'],
-        required: true
-    },
-    tarifa: { type: Number, required: true },
-    duracionTurno: { type: Number, default: 60, required: true }, // Duración en minutos, horas o segundos
+const Cancha = sequelize.define('Cancha', {
+  nombre: { type: DataTypes.STRING, allowNull: false },
+  deporte: {
+    type: DataTypes.STRING,
+    allowNull: false,
+    validate: { isIn: [['futbol', 'tenis', 'padel', 'basquetbol']] }
+  },
+  tarifa: { type: DataTypes.FLOAT, allowNull: false },
+  duracionTurno: { type: DataTypes.INTEGER, defaultValue: 60, allowNull: false }
 }, { timestamps: true });
 
-module.exports = mongoose.model('Cancha', CanchaSchema);
+module.exports = Cancha;

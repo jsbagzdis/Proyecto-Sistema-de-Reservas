@@ -1,40 +1,37 @@
+const { DataTypes } = require('sequelize');
+const sequelize = require('../Config/db'); // Asegurate de que la ruta a tu db.js sea correcta
 
-const mongoose = require('node:mongoose');
-
-const ReservaSchema = new mongoose.Schema({
-// Vincula la reserva dirtectamente con el ID del usuario que inicio sesión
-    usuarioId: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'Usuario',
-        required: true
-    },
-    deporte: {
-        type: String,
-        enum: ['futbol', 'tenis', 'padel', 'basquetbol'],
-        required: true
-    },
-    canchaId: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'Cancha',
-        required: true
-    },
-    fecha: {
-        type: String, // Formato "YYYY-MM-DD"
-        required: true
-    },
-    horario: {
-        type: String, // Formato "HH:MM"
-        required: true
-    },
-    duracion: {
-        type: Number, // Duración en minutos, horas o segundos
-        required: true
-    },
-    estado: {
-        type: String,
-        enum: ['pendiente', 'confirmada', 'cancelada'],
-        default: 'pendiente'
+const Reserva = sequelize.define('Reserva', {
+  // En MySQL usamos enteros (INTEGER) para las llaves foráneas en lugar de ObjectIds
+  deporte: {
+    type: DataTypes.STRING,
+    allowNull: false,
+    validate: {
+      isIn: [['futbol', 'tenis', 'padel', 'basquetbol']] // Equivalente al enum de Mongoose
     }
-}, { timestamps: true });
+  },
+  fecha: {
+    type: DataTypes.DATEONLY, // Formato "YYYY-MM-DD"
+    allowNull: false
+  },
+  horario: {
+    type: DataTypes.STRING, // Formato "HH:MM"
+    allowNull: false
+  },
+  duracion: {
+    type: DataTypes.INTEGER, // En MySQL especificamos mejor INTEGER para minutos/horas
+    allowNull: false
+  },
+  estado: {
+    type: DataTypes.STRING,
+    allowNull: false,
+    defaultValue: 'pendiente',
+    validate: {
+      isIn: [['pendiente', 'confirmada', 'cancelada']]
+    }
+  }
+}, { 
+  timestamps: true // Esto crea automáticamente createdAt y updatedAt en MySQL
+});
 
-module.exports = mongoose.model('Reserva', ReservaSchema);
+module.exports = Reserva;
