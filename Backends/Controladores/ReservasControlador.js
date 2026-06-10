@@ -1,18 +1,23 @@
 const Reserva = require('../Modelos/Reservas');
 const Usuario = require('../Modelos/Usuarios');
 const Cancha = require('../Modelos/Canchas');
+const conectarDB = require('../Config/db'); // Necesitamos la instancia para hacer la consulta cruda
 
 // Crear una nueva reserva
 exports.crearReserva = async (req, res) => {
     try {
-        // 1. Agregamos deporte, duracion y estado a la lectura del body
         const { fecha, horario, UsuarioId, CanchaId, deporte, duracion, estado } = req.body;
 
-        // Validar si la cancha ya está ocupada en ese día y horario
+        // 🔥 NORMALIZAMOS LA HORA: Si viene "17:00", la convertimos en "17:00:00" para MySQL
+        const horarioFormateado = horario.includes(':00') && horario.split(':').length === 2 
+            ? `${horario}:00` 
+            : horario;
+
+        // Validar si la cancha ya está ocupada usando la hora formateada
         const turnoOcupado = await Reserva.findOne({
             where: {
                 fecha,
-                horario,
+                horario: horarioFormateado,
                 CanchaId
             }
         });
@@ -21,21 +26,30 @@ exports.crearReserva = async (req, res) => {
             return res.status(400).json({ msg: 'Este turno ya se encuentra reservado.' });
         }
 
-        // 2. Le pasamos todos los campos obligatorios a la base de datos
+        // Creamos el registro en la base de datos
         const nuevaReserva = await Reserva.create({
             fecha,
-            horario,
+            horario: horarioFormateado, // 🔥 Guardamos con los segundos
             UsuarioId, 
             CanchaId,
-            deporte: deporte || 'futbol',     // Si no viene en el body, usa 'futbol'
-            duracion: duracion || 60,         // Si no viene, toma 60 minutos
-            estado: estado || 'pendiente'     // Si no viene, arranca en 'pendiente'
+            deporte,     
+            duracion: parseInt(duracion), // Aseguramos que sea un número entero  
+            estado: estado || 'pendiente'     
         });
 
-        res.status(201).json({ msg: 'Reserva realizada con éxito', reserva: nuevaReserva });
+        const canchaInfo = await Cancha.findByPk(CanchaId, { attributes: ['nombre'] });
+
+        return res.status(201).json({ msg: 'Reserva realizada con éxito', reserva: {
+            fecha: nuevaReserva.fecha,
+            horario: nuevaReserva.horario,
+            deporte: nuevaReserva.deporte,
+            canchaNombre: canchaInfo ? canchaInfo.nombre : 'Cancha seleccionada',
+            estado: nuevaReserva.estado
+        } 
+    });
     } catch (error) {
-        console.error(error);
-        res.status(500).json({ msg: 'Hubo un error al crear la reserva.' });
+        console.error("Error  al crear reserva:", error);
+        return res.status(500).json({ msg: 'Hubo un error al crear la reserva.'});
     }
 };
 
@@ -52,5 +66,61 @@ exports.obtenerReservas = async (req, res) => {
     } catch (error) {
         console.error(error);
         res.status(500).json({ msg: 'Hubo un error al obtener las reservas.' });
+    }
+};
+
+// 👇 NUEVA FUNCIÓN: Buscar turnos dinámicamente filtrando por deporte, fecha y duración 👇
+exports.obtenerTurnosDisponibles = async (req, res) => {
+    try {
+        const { deporte, fecha, duracion } = req.query;
+
+        // 1. Validación inicial
+        if (!deporte || !fecha || !duracion) {
+            return res.status(400).json({ msg: 'Faltan parámetros de búsqueda (deporte, fecha, duracion).' });
+        }
+
+        // 2. Consulta SQL pura para cruzar canchas y horarios fijos, descartando las que ya estén reservadas ese día a esa hora
+        // Usamos REPLacements para blindar la query contra inyecciones SQL
+        const query = `
+            SELECT 
+                c.id AS canchaId,
+                c.nombre AS canchaNombre,
+                c.tarifa AS tarifaBase,
+                TIME_FORMAT(h.horaInicio, '%H:%i') AS hora
+            FROM canchas c
+            INNER JOIN horarios_canchas h ON c.id = h.canchaId
+            WHERE c.deporte = :deporte
+              AND NOT EXISTS (
+                  SELECT 1 
+                  FROM reservas r 
+                  WHERE r.CanchaId = c.id 
+                    AND r.fecha = :fecha 
+                    AND TIME_FORMAT(r.horario, '%H:%i') = TIME_FORMAT(h.horaInicio, '%H:%i')
+              )
+            ORDER BY h.horaInicio ASC;
+        `;
+
+        const [resultados] = await conectarDB.query(query, {
+            replacements: { deporte, fecha }
+        });
+
+        // 3. Calculamos la tarifa final basada en la duración que mandó el usuario en el formulario
+        const turnosProcesados = resultados.map(turno => {
+            const factorTiempo = parseInt(duracion) / 60; // 60 min = 1, 90 min = 1.5, 120 min = 2
+            const tarifaTotal = Math.round(turno.tarifaBase * factorTiempo);
+
+            return {
+                canchaId: turno.canchaId,
+                canchaNombre: turno.canchaNombre,
+                hora: turno.hora,
+                tarifaTotal
+            };
+        });
+
+        res.json(turnosProcesados);
+
+    } catch (error) {
+        console.error('Error al obtener turnos disponibles:', error);
+        res.status(500).json({ msg: 'Hubo un error al procesar los horarios disponibles.' });
     }
 };

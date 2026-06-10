@@ -4,43 +4,63 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../Css/reserva.css">
-    <title>Sistema de Reservas</title>
+    <title>Sistema de Reservas - Planeta Deporte</title>
 </head>
 <body>
+
+    <nav class="navbar-planeta">
+        <div class="nav-contenedor">
+            <div class="nav-logo">
+                <span>Planeta Deporte</span>
+            </div>
+            
+            <button class="menu-toggle" id="menuToggle">☰</button>
+
+            <div class="nav-links" id="navLinks">
+                <a href="mis_reservas.html">Mis Reservas</a>
+                <a href="perfil.html">Mi Perfil</a>
+                <a href="soporte.html">Atención al Cliente</a>
+                <a href="login.html" class="btn-cerrar-sesion">Cerrar Sesión</a>
+            </div>
+        </div>
+    </nav>
+
     <div class="todo">
         <div class="encabezado">
-            <h1>NUEVA RESERVA</h1>
-            <p>Seleccioná fecha, deporte y horario para tu partido</p>
+            <h1>BUSCAR TURNOS</h1>
+            <p>Elegí tu deporte, la fecha y la duración para ver los horarios disponibles</p>
         </div>
 
         <form id="formularioForm">
-            <label for="canchaSelect">Cancha Disponible</label>
-            <select id="canchaSelect">
-                <option value="" disbled selected>Cargando canchas desde el sistema...</option>
+            <label for="deporteSelect">Seleccioná el Deporte</label>
+            <select id="deporteSelect" required>
+                <option value="" disabled selected>Seleccione un deporte...</option>
+                <option value="Fútbol">Fútbol</option>
+                <option value="Básquetbol">Básquetbol</option>
+                <option value="Pádel">Pádel</option>
+                <option value="Tenis">Tenis</option>
             </select>
 
-            <label for="fecha">Fecha</label>
-            <input type="date" id="fecha">
+            <label for="fecha">Fecha del Partido</label>
+            <input type="date" id="fecha" required>
 
-            <label for="horario">Horario</label>
-            <input type="time" id="horario">
-
-            <label for="duracion">Duración</label>
-            <select id="duracion">
+            <label for="duracion">Duración del Turno</label>
+            <select id="duracion" required>
                 <option value="" disabled selected>Seleccione la duración...</option>
                 <option value="60">1 hs</option>
                 <option value="90">1:30 hs</option>
                 <option value="120">2 hs</option>
             </select>
 
-            <button type="button" id="btnEnviar">Enviar</button>
+            <button type="button" id="btnEnviar">Buscar Horarios Disponibles</button>
             
             <p id="mensaje"></p>
         </form>
 
         <div class="ListaReservas" id="contenedorTurnos">
             <h2>Turnos Disponibles</h2>
-            </div>
+            <div id="listaHorariosLibres"></div> </div>
+        </div>
     </div>
 
     <script src="../JavaScript/reserva.js"></script>

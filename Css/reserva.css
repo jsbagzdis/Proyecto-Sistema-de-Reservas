@@ -162,3 +162,308 @@ input:focus, select:focus {
     font-weight: bold;
     cursor: pointer;
 }
+
+/* ==========================================================================
+   NUEVO MENÚ RESPONSIVO (PLANETA DEPORTE)
+   ========================================================================== */
+
+.navbar-planeta {
+    width: 100%;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.nav-contenedor {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 15px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.nav-logo {
+    color: white;
+    font-weight: 800;
+    font-size: 20px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    text-shadow: 1px 1px 3px rgba(0,0,0,0.3);
+}
+
+.nav-links {
+    display: flex;
+    align-items: center;
+    gap: 25px;
+}
+
+.nav-links a {
+    color: white;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 14px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    transition: color 0.3s ease;
+}
+
+.nav-links a:hover {
+    color: #003049; /* Usa tu color oscuro de los botones al pasar el mouse */
+}
+
+/* Botón Destacado de Cerrar Sesión */
+.nav-links .btn-cerrar-sesion {
+    background-color: #b91c1c;
+    padding: 8px 16px;
+    border-radius: 8px;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    transition: background 0.3s ease;
+}
+
+.nav-links .btn-cerrar-sesion:hover {
+    background-color: #ef4444;
+    color: white;
+}
+
+/* Botón Hamburguesa oculto por defecto (PC) */
+.menu-toggle {
+    display: none;
+    background: none;
+    border: none;
+    color: white;
+    font-size: 28px;
+    cursor: pointer;
+}
+
+/* --- ADAPTACIÓN RESPONSIVA (CELULARES) --- */
+@media (max-width: 768px) {
+    .menu-toggle {
+        display: block; /* Aparece en celulares */
+    }
+
+    .nav-links {
+        display: none; /* Se oculta por defecto en celular */
+        flex-direction: column;
+        width: 100%;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        background: rgba(0, 48, 73, 0.95); /* Fondo sólido oscuro para que se lea perfecto */
+        padding: 20px 0;
+        gap: 20px;
+        border-bottom: 3px solid rgba(255, 166, 2, 1);
+        box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+    }
+
+    /* Clase que va a meter JS para mostrar el menú */
+    .nav-links.active {
+        display: flex;
+    }
+
+    .nav-links a {
+        width: 100%;
+        text-align: center;
+        padding: 10px 0;
+    }
+}
+
+.turno-info {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.turno-hora {
+    color: #003049;
+    font-size: 1.2rem;
+    font-weight: 700;
+}
+
+.turno-detalle {
+    font-size: 0.9rem;
+    color: #555555;
+}
+
+/* Estilos para el botón que genera el JavaScript */
+.btnReservarItem {
+    background-color: #28a745; /* Verde como el de tu captura */
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 14px;
+    font-weight: bold;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background 0.2s ease, transform 0.1s ease;
+}
+
+.btnReservarItem:hover {
+    background-color: #218838; /* Un verde un toque más oscuro al pasar el mouse */
+}
+
+.btnReservarItem:active {
+    transform: scale(0.95); /* Efecto de hundido al cliquear */
+}
+
+/* Estilo por si el botón se deshabilita mientras procesa */
+.btnReservarItem:disabled {
+    background-color: #6c757d;
+    cursor: not-allowed;
+}
+/* Contenedor flotante para el mensaje de éxito */
+.modal-reserva {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0.9);
+    background: linear-gradient(135deg, #1e1e2f, #2a2a40);
+    border: 2px solid #ff9f43; /* Un color naranja/dorado para "pendiente" */
+    border-radius: 15px;
+    padding: 25px;
+    box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+    text-align: center;
+    color: white;
+    font-family: 'Poppins', sans-serif;
+    opacity: 0;
+    transition: all 0.3s ease-in-out;
+    pointer-events: none;
+    width: 90%;
+    max-width: 400px;
+}
+
+.modal-reserva.mostrar {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+    pointer-events: auto;
+}
+
+.modal-reserva h3 {
+    color: #ff9f43;
+    margin-bottom: 15px;
+    font-size: 22px;
+}
+
+.modal-detalles {
+    background: rgba(255, 255, 255, 0.05);
+    padding: 15px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    text-align: left;
+    font-size: 15px;
+    line-height: 1.6;
+}
+
+.modal-detalles strong {
+    color: #00d2d3;
+}
+
+.badge-pendiente {
+    background-color: #ff9f43;
+    color: #1e1e2f;
+    padding: 3px 8px;
+    border-radius: 5px;
+    font-weight: bold;
+    font-size: 12px;
+}
+
+.btn-cerrar-modal {
+    background-color: #ff9f43;
+    color: #1e1e2f;
+    border: none;
+    padding: 10px 20px;
+    font-weight: bold;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.btn-cerrar-modal:hover {
+    background-color: #ffb366;
+}
+
+/* Fondo oscuro detrás del cartel */
+.overlay-modal {
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    z-index: 999;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+}
+.overlay-modal.mostrar {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+/* ===================================================
+   ESTILOS PARA EL MENÚ HAMBURGUESA (RESPONSIVE)
+   =================================================== */
+
+/* 1. Por defecto en pantallas grandes (PC), ocultamos el botón de tres rayas */
+.menu-toggle {
+    display: none;
+    background: none;
+    border: none;
+    color: white;
+    font-size: 30px;
+    cursor: pointer;
+    outline: none;
+}
+
+/* 2. Cuando la pantalla es chica (Celulares/Tablets) */
+@media (max-width: 768px) {
+    
+    /* Hacemos que el contenedor del Navbar sepa acomodar el botón */
+    .nav-contenedor {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        position: relative;
+        width: 100%;
+        padding: 10px 20px;
+    }
+
+    /* Mostramos el botón hamburguesa ☰ */
+    .menu-toggle {
+        display: block;
+    }
+
+    /* Ocultamos la barra de links por defecto y la posicionamos flotando abajo del navbar */
+    .nav-links {
+        display: none; /* 🔥 Clave: arranca escondido */
+        flex-direction: column;
+        position: absolute;
+        top: 100%; /* Se despliega justo abajo de la barra */
+        left: 0;
+        width: 100%;
+        background-color: #1e1e2f; /* Cambialo por el color de tu Navbar */
+        padding: 20px 0;
+        box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.4);
+        z-index: 999;
+        text-align: center;
+    }
+
+    /* Espaciado de los links verticales en el celular */
+    .nav-links a {
+        display: block;
+        padding: 15px 0;
+        width: 100%;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    }
+    
+    .nav-links a:last-child {
+        border-bottom: none;
+    }
+
+    /* 🔥 LA MAGIA: Cuando JS le clava la clase 'active', el CSS lo muestra */
+    .nav-links.active {
+        display: flex; /* Se vuelve visible al toque */
+    }
+}

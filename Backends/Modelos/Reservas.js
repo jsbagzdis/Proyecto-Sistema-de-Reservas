@@ -7,7 +7,7 @@ const Reserva = sequelize.define('Reserva', {
     type: DataTypes.STRING,
     allowNull: false,
     validate: {
-      isIn: [['futbol', 'tenis', 'padel', 'basquetbol']] // Equivalente al enum de Mongoose
+      isIn: [['Fútbol', 'Tenis', 'Pádel', 'Básquetbol', "Basquetbol"]] // Equivalente al enum 
     }
   },
   fecha: {

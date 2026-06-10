@@ -1,122 +1,175 @@
-document.addEventListener("DOMContentLoaded", async () => {
-    const canchaSelect = document.getElementById("canchaSelect");
-    const btnEnviar = document.getElementById("btnEnviar");
-    const msg = document.getElementById("mensaje");
+document.addEventListener("DOMContentLoaded", () => {
+    // ==========================================
+    // 1. LÓGICA DE LA BARRA DE HAMBURGUESA
+    // ==========================================
+    const menuToggle = document.getElementById("menuToggle");
+    const navLinks = document.getElementById("navLinks");
 
-    // 1. CONTROL DE ACCESO: Validar login
-    const usuarioLogueado = JSON.parse(sessionStorage.getItem("usuarioLogueado"));
-    if (!usuarioLogueado) {
-        alert("Por favor, inicia sesión primero.");
-        window.location.href = "../Html/login.html";
+    if (menuToggle && navLinks) {
+        menuToggle.addEventListener("click", () => {
+            navLinks.classList.toggle("active");
+        });
+    }
+
+    // ==========================================
+    // 2. CONFIGURACIÓN E INICIALIZACIÓN DE BUSQUEDA
+    // ==========================================
+    const btnEnviar = document.getElementById("btnEnviar");
+    const contenedorTurnos = document.getElementById("listaHorariosLibres");
+    const mensaje = document.getElementById("mensaje");
+
+    // Creamos dinámicamente el contenedor del cartel estético al final del body
+    const overlay = document.createElement("div");
+    overlay.className = "overlay-modal";
+    const modal = document.createElement("div");
+    modal.className = "modal-reserva";
+    document.body.appendChild(overlay);
+    document.body.appendChild(modal);
+
+    const USUARIO_ID_LOGUEADO = 1; 
+
+    if (!btnEnviar) {
+        console.error("No se encontró el botón con ID 'btnEnviar' en el HTML.");
         return;
     }
 
-    // 2. CARGAR LAS CANCHAS: Rellenar el select apenas abre la página
-    try {
-        const respuesta = await fetch("http://localhost:3000/api/canchas");
-        const canchas = await respuesta.json();
-
-        if (respuesta.ok) {
-            canchaSelect.innerHTML = '<option value="" disabled selected>Seleccione una cancha...</option>';
-            canchas.forEach(cancha => {
-                const option = document.createElement("option");
-                option.value = cancha.id; // ID de MySQL (1, 2, etc.)
-                option.textContent = `${cancha.nombre} (${cancha.deporte.toUpperCase()}) - $${cancha.tarifa}`;
-                canchaSelect.appendChild(option);
-            });
-        } else {
-            canchaSelect.innerHTML = '<option value="">Error al cargar las canchas</option>';
-        }
-    } catch (error) {
-        console.error("Error al conectar con el backend:", error);
-        canchaSelect.innerHTML = '<option value="">No se pudo conectar con el servidor</option>';
-    }
-
-    // 3. ENVIAR RESERVA: Crear el registro en MySQL al hacer clic en ENVIAR
-    btnEnviar.addEventListener("click", async (e) => {
-        e.preventDefault();
-        
-        // Limpiar estilos de error previos si los usás
-        document.querySelectorAll('input, select').forEach(el => el.classList.remove('input-error'));
-        msg.textContent = "";
-        msg.className = "";
-
-        const canchaId = canchaSelect.value;
+    // ==========================================
+    // 3. EVENTO PARA BUSCAR LOS TURNOS (GET)
+    // ==========================================
+    btnEnviar.addEventListener("click", async () => {
+        const deporte = document.getElementById("deporteSelect").value;
         const fecha = document.getElementById("fecha").value;
-        const horario = document.getElementById("horario").value;
         const duracion = document.getElementById("duracion").value;
 
-        // Validaciones de campos vacíos
-        if (!canchaId) {
-            canchaSelect.classList.add("input-error");
-            msg.textContent = "Falta seleccionar la cancha.";
-            msg.className = "msj-rojo";
-            return;
-        }
-        if (!fecha) {
-            document.getElementById("fecha").classList.add("input-error");
-            msg.textContent = "Falta elegir una fecha.";
-            msg.className = "msj-rojo";
-            return;
-        }
-        if (!horario) {
-            document.getElementById("horario").classList.add("input-error");
-            msg.textContent = "Falta elegir un horario.";
-            msg.className = "msj-rojo";
-            return;
-        }
-        if (!duracion) {
-            document.getElementById("duracion").classList.add("input-error");
-            msg.textContent = "Falta elegir la duración.";
-            msg.className = "msj-rojo";
+        if (!deporte || !fecha || !duracion) {
+            mensaje.textContent = "Por favor, completa todos los campos para buscar.";
+            mensaje.style.color = "red";
             return;
         }
 
-        // Validación de fecha pasada
-        const ahora = new Date();
-        const reservaTime = new Date(fecha + "T" + horario);
-        if (reservaTime < ahora) {
-            document.getElementById("fecha").classList.add("input-error");
-            document.getElementById("horario").classList.add("input-error");
-            msg.textContent = "Error: La fecha o el horario ya pasaron.";
-            msg.className = "msj-rojo";
-            return;
-        }
+        mensaje.textContent = "Buscando turnos disponibles...";
+        mensaje.style.color = "white";
+        contenedorTurnos.innerHTML = ""; 
 
-        // Convertir la duración de la interfaz a minutos para MySQL
-        let duracionEnMinutos = 60;
-        if (duracion === "1.5") duracionEnMinutos = 90;
-        if (duracion === "2") duracionEnMinutos = 120;
-
-        // Enviar datos al Backend
         try {
-            const respuestaReserva = await fetch("http://localhost:3000/api/reservas/crear", {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({
-                    fecha: fecha,
-                    horario: horario,
-                    deporte: "futbol", // Pone un valor base o podés quitarlo si tu backend ya hereda del CanchaId
-                    duracion: duracionEnMinutos,
-                    UsuarioId: usuarioLogueado.id,
-                    CanchaId: parseInt(canchaId)
-                })
+            const url = `http://localhost:3000/api/reservas/disponibles?deporte=${encodeURIComponent(deporte)}&fecha=${fecha}&duracion=${duracion}`;
+            const respuesta = await fetch(url);
+            const datos = await respuesta.json();
+
+            if (!respuesta.ok) {
+                throw new Error(datos.msg || "Error al buscar turnos.");
+            }
+
+            if (datos.length === 0) {
+                contenedorTurnos.innerHTML = `<p style="color: white; text-align: center; padding: 20px;">No hay turnos disponibles para esta combinación.</p>`;
+                mensaje.textContent = "";
+                return;
+            }
+
+            mensaje.textContent = ""; 
+
+            contenedorTurnos.dataset.fechaElegida = fecha;
+            contenedorTurnos.dataset.duracionElegida = duracion;
+            contenedorTurnos.dataset.deporteElegido = deporte;
+
+            datos.forEach(turno => {
+                const turnoCard = document.createElement("div");
+                turnoCard.className = "turno-item";
+
+                turnoCard.innerHTML = `
+                    <div class="turno-info">
+                        <span class="turno-hora">${turno.hora} hs</span>
+                        <p class="turno-detalle">${turno.canchaNombre}</p>
+                        <small style="color: #28a745; font-weight: bold;">Precio: $${turno.tarifaTotal}</small>
+                    </div>
+                    <button class="btnReservarItem" data-cancha="${turno.canchaId}" data-hora="${turno.hora}">
+                        Reservar
+                    </button>
+                `;
+
+                contenedorTurnos.appendChild(turnoCard);
             });
 
-            const datos = await respuestaReserva.json();
-
-            if (respuestaReserva.ok) {
-                msg.textContent = "¡Reserva realizada con éxito en la base de datos!";
-                msg.className = "msj-verde";
-                document.getElementById("formularioForm").reset();
-            } else {
-                msg.textContent = datos.msg || "No se pudo completar la reserva.";
-                msg.className = "msj-rojo";
-            }
         } catch (error) {
-            console.error("Error al crear reserva:", error);
-            msg.textContent = "Error de conexión al procesar la reserva.";
-            msg.className = "msj-rojo";
+            console.error("Error en la petición:", error);
+            mensaje.textContent = error.message || "No se pudo conectar con el servidor.";
+            mensaje.style.color = "red";
+        }
+    });
+
+    // ==========================================
+    // 4. EVENTO PARA CREAR LA RESERVA (POST) ESTÉTICO
+    // ==========================================
+    contenedorTurnos.addEventListener("click", async (e) => {
+        if (e.target.classList.contains("btnReservarItem")) {
+            const boton = e.target;
+            
+            const CanchaId = boton.dataset.cancha;
+            const horario = boton.dataset.hora; 
+            const fecha = contenedorTurnos.dataset.fechaElegida;
+            const duracion = contenedorTurnos.dataset.duracionElegida;
+            const deporte = contenedorTurnos.dataset.deporteElegido;
+
+            boton.disabled = true;
+            boton.textContent = "Procesando...";
+
+            try {
+                const respuesta = await fetch("http://localhost:3000/api/reservas/crear", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({
+                        fecha,
+                        horario,
+                        UsuarioId: USUARIO_ID_LOGUEADO,
+                        CanchaId,
+                        deporte,
+                        duracion: parseInt(duracion),
+                        estado: "pendiente" // 🔥 Mandamos pendiente al backend
+                    })
+                });
+
+                const resultado = await respuesta.json();
+
+                if (!respuesta.ok) {
+                    throw new Error(resultado.msg || "No se pudo concretar la reserva.");
+                }
+
+                // 🔥 RENDERIZAMOS EL MODAL CON DISEÑO DE ALTA CALIDAD
+                const resData = resultado.reserva;
+                modal.innerHTML = `
+                    <h3>¡Solicitud Enviada!</h3>
+                    <p style="margin-bottom: 15px;">Tu turno quedó registrado y está esperando la aprobación del complejo.</p>
+                    <div class="modal-detalles">
+                        📌 <strong>Cancha:</strong> ${resData.canchaNombre}<br>
+                        ⚽ <strong>Deporte:</strong> ${resData.deporte}<br>
+                        📅 <strong>Fecha:</strong> ${resData.fecha}<br>
+                        ⏰ <strong>Horario:</strong> ${resData.horario.substring(0, 5)} hs<br>
+                        🔄 <strong>Estado:</strong> <span class="badge-pendiente">${resData.estado.toUpperCase()}</span>
+                    </div>
+                    <button class="btn-cerrar-modal" id="btnCerrarModal">Entendido</button>
+                `;
+
+                // Activamos las clases CSS para que aparezcan con transición suave
+                overlay.classList.add("mostrar");
+                modal.classList.add("mostrar");
+
+                // Configuración para cerrar el modal
+                document.getElementById("btnCerrarModal").addEventListener("click", () => {
+                    overlay.classList.remove("mostrar");
+                    modal.classList.remove("mostrar");
+                });
+
+                // Sacamos la tarjeta de la lista del frontend
+                boton.closest(".turno-item").remove();
+
+            } catch (error) {
+                console.error("Error al reservar:", error);
+                alert(error.message || "Hubo un error al intentar reservar.");
+                boton.disabled = false;
+                boton.textContent = "Reservar";
+            }
         }
     });
 });
