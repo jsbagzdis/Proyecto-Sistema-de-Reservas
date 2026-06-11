@@ -5,6 +5,11 @@ document.addEventListener("DOMContentLoaded", () => {
     const menuToggle = document.getElementById("menuToggle");
     const navLinks = document.getElementById("navLinks");
 
+    // 🔥 Bloqueamos las fechas anteriores a hoy en el calendario
+    const fechaInput = document.getElementById("fecha");
+    const hoy = new Date().toISOString().split('T')[0];
+    fechaInput.setAttribute("min", hoy);
+
     if (menuToggle && navLinks) {
         menuToggle.addEventListener("click", () => {
             navLinks.classList.toggle("active");

@@ -8,6 +8,15 @@ exports.crearReserva = async (req, res) => {
     try {
         const { fecha, horario, UsuarioId, CanchaId, deporte, duracion, estado } = req.body;
 
+        // 🔥 VALIDACIÓN DE FECHA: No permitir fechas pasadas
+        const fechaElegida = new Date(fecha);
+        const fechaHoy = new Date();
+        fechaHoy.setHours(0, 0, 0, 0); // Ajustamos a medianoche para comparar solo la fecha
+
+        if (fechaElegida < fechaHoy) {
+            return res.status(400).json({ msg: 'No puedes realizar reservas en fechas pasadas.' });
+        }
+
         // 🔥 NORMALIZAMOS LA HORA: Si viene "17:00", la convertimos en "17:00:00" para MySQL
         const horarioFormateado = horario.includes(':00') && horario.split(':').length === 2 
             ? `${horario}:00` 
