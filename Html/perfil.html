@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mi Perfil - Planeta Deporte</title>
+    <link rel="stylesheet" href="../Css/perfil.css"> 
+</head>
+<body>
+
+    <nav class="navbar-planeta">
+        <div class="nav-contenedor">
+
+            <div class="nav-logo">
+                <span>Planeta Deporte</span>
+            </div>
+
+            <button class="menu-toggle" id="menuToggle">☰</button>
+
+            <div class="nav-links" id="navLinks">
+                <a href="javascript:history.back()">← Volver Atrás</a>
+                <a href="mis_reservas.html">Mis Reservas</a>
+                <a href="soporte.html">Atención al Cliente</a>
+                <a href="login.html" class="btn-cerrar-sesion">Cerrar Sesión</a>
+            </div>
+
+        </div>
+    </nav>
+
+    <div class="perfil-container">
+        <h2>Mi Perfil</h2>
+        
+        <div class="tarjeta-perfil">
+            <div class="form-group">
+                <label for="perfilNombre"><strong>Nombre:</strong></label>
+                <input type="text" id="perfilNombre" placeholder="Tu nombre">
+            </div>
+            
+            <div class="form-group">
+                <label for="perfilUsuario"><strong>Nombre de Usuario:</strong></label>
+                <input type="text" id="perfilUsuario" placeholder="Tu usuario">
+            </div>
+            
+            <div class="form-group">
+                <label for="perfilCorreo"><strong>Correo Electrónico:</strong></label>
+                <input type="email" id="perfilCorreo" placeholder="Tu correo">
+            </div>
+            
+            <div class="form-group">
+                <label for="perfilTelefono"><strong>Teléfono:</strong></label>
+                <input type="text" id="perfilTelefono" placeholder="Ingresa tu teléfono aquí">
+            </div>
+        </div>
+
+        <button onclick="guardarCambios()" class="btn-guardar">Guardar Cambios</button>
+        <button onclick="cerrarSesion()" class="btn-cerrar">Cerrar Sesión</button>
+    </div>
+
+    <script src="../JavaScript/perfil.js"></script> 
+</body>
+</html>

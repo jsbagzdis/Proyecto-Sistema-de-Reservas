@@ -1,0 +1,443 @@
+/* ==========================================================================
+   ESTILOS ESPECÍFICOS PARA LA VISTA: MI PERFIL (Formulario Estilo Tarjeta)
+   ========================================================================== */
+
+/* Contenedor principal del perfil */
+body {
+    /* Corregido el ángulo a 135deg para un degradado diagonal limpio */
+    background: linear-gradient(335deg, rgba(255, 166, 2, 1), rgba(255, 255, 255, 1), rgb(20, 5, 231));
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+}
+
+.perfil-container {
+    width: 90%;
+    max-width: 500px;
+    margin-top: 40px;
+    padding-bottom: 60px;
+    animation: cargarPerfil 0.5s ease-out;
+}
+
+/* Título principal de la sección */
+.perfil-container h2 {
+    color: #ffffff;
+    text-align: center;
+    font-size: 2.2rem;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.4);
+    margin-bottom: 25px;
+}
+
+/* Tarjeta contenedora de los datos */
+.tarjeta-perfil {
+    background: rgba(255, 255, 255, 0.95);
+    padding: 35px;
+    border-radius: 20px;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    margin-bottom: 20px;
+}
+
+/* Estructura de cada grupo del formulario */
+.form-group {
+    display: flex;
+    flex-direction: column; /* Cambiado a columna para que el input quede abajo del label, ideal en móviles */
+    margin-bottom: 20px;
+}
+
+.form-group:last-child {
+    margin-bottom: 0; /* Quita el margen al último input */
+}
+
+/* Estilo para las etiquetas (Labels) */
+.form-group label {
+    color: #003049;
+    font-weight: 700;
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 8px;
+}
+
+/* Estilo para los Inputs (Campos editables) */
+.form-group input {
+    background: #f8f9fa;
+    color: #333333;
+    font-weight: 500;
+    font-size: 15px;
+    padding: 12px 16px;
+    border-radius: 8px;
+    border: 1px solid #e0e0e0;
+    transition: all 0.3s ease;
+    outline: none;
+    box-sizing: border-box;
+    width: 100%;
+}
+
+/* Efecto de enfoque cuando el usuario hace clic para escribir */
+.form-group input:focus {
+    background: #ffffff;
+    border-color: #ffa602; /* Match con tu naranja del fondo */
+    box-shadow: 0 0 8px rgba(255, 166, 2, 0.3);
+}
+
+/* Estilización del Placeholder (texto de guía opaco) */
+.form-group input::placeholder {
+    color: #a0a0a0;
+    font-weight: 400;
+}
+
+/* ==========================================================================
+   ESTILOS DE BOTONES
+   ========================================================================== */
+
+/* Estilo Base Compartido para Botones */
+.btn-guardar, .btn-cerrar {
+    display: block;
+    width: 100%;
+    border: none;
+    padding: 15px;
+    border-radius: 10px;
+    font-weight: 800;
+    font-size: 16px;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-sizing: border-box;
+    text-align: center;
+}
+
+/* Botón de Guardar Cambios (Verde/Azul deportivo) */
+.btn-guardar {
+    background: #0284c7; /* Azul deportivo llamativo */
+    color: white;
+    margin-bottom: 15px;
+    box-shadow: 0 6px 15px rgba(2, 132, 199, 0.3);
+}
+
+.btn-guardar:hover {
+    transform: translateY(-2px);
+    background: #0ea5e9;
+    box-shadow: 0 8px 20px rgba(14, 165, 233, 0.4);
+}
+
+.btn-guardar:active {
+    transform: scale(0.98);
+}
+
+/* Botón de Cerrar Sesión (Rojo Destacado) */
+.btn-cerrar {
+    background: #b91c1c;
+    color: white;
+    box-shadow: 0 6px 15px rgba(185, 28, 28, 0.3);
+}
+
+/* Efecto Hover para el botón de salir */
+.btn-cerrar:hover {
+    transform: translateY(-2px);
+    background: #ef4444;
+    box-shadow: 0 8px 20px rgba(239, 68, 68, 0.4);
+}
+
+.btn-cerrar:active {
+    transform: scale(0.98);
+}
+
+.navbar-planeta {
+    width: 100%;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.nav-contenedor {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 15px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.nav-logo {
+    color: white;
+    font-weight: 800;
+    font-size: 20px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    text-shadow: 1px 1px 3px rgba(0,0,0,0.3);
+}
+
+.nav-links {
+    display: flex;
+    align-items: center;
+    gap: 25px;
+}
+
+.nav-links a {
+    color: white;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 14px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    transition: color 0.3s ease;
+}
+
+.nav-links a:hover {
+    color: #003049; /* Usa tu color oscuro de los botones al pasar el mouse */
+}
+
+/* Botón Destacado de Cerrar Sesión */
+.nav-links .btn-cerrar-sesion {
+    background-color: #b91c1c;
+    padding: 8px 16px;
+    border-radius: 8px;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    transition: background 0.3s ease;
+}
+
+.nav-links .btn-cerrar-sesion:hover {
+    background-color: #ef4444;
+    color: white;
+}
+
+.menu-toggle {
+    display: none;
+    background: none;
+    border: none;
+    color: white;
+    font-size: 28px;
+    cursor: pointer;
+}
+
+/* --- ADAPTACIÓN RESPONSIVA (CELULARES) --- */
+@media (max-width: 768px) {
+    .menu-toggle {
+        display: block; /* Aparece en celulares */
+    }
+
+    .nav-links {
+        display: none; /* Se oculta por defecto en celular */
+        flex-direction: column;
+        width: 100%;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        background: rgba(0, 48, 73, 0.95); /* Fondo sólido oscuro para que se lea perfecto */
+        padding: 20px 0;
+        gap: 20px;
+        border-bottom: 3px solid rgba(255, 166, 2, 1);
+        box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+    }
+
+    /* Clase que va a meter JS para mostrar el menú */
+    .nav-links.active {
+        display: flex;
+    }
+
+    .nav-links a {
+        width: 100%;
+        text-align: center;
+        padding: 10px 0;
+    }
+}
+
+.turno-info {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.turno-hora {
+    color: #003049;
+    font-size: 1.2rem;
+    font-weight: 700;
+}
+
+.turno-detalle {
+    font-size: 0.9rem;
+    color: #555555;
+}
+
+/* Estilos para el botón que genera el JavaScript */
+.btnReservarItem {
+    background-color: #28a745; /* Verde como el de tu captura */
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 14px;
+    font-weight: bold;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background 0.2s ease, transform 0.1s ease;
+}
+
+.btnReservarItem:hover {
+    background-color: #218838; /* Un verde un toque más oscuro al pasar el mouse */
+}
+
+.btnReservarItem:active {
+    transform: scale(0.95); /* Efecto de hundido al cliquear */
+}
+
+/* Estilo por si el botón se deshabilita mientras procesa */
+.btnReservarItem:disabled {
+    background-color: #6c757d;
+    cursor: not-allowed;
+}
+/* Contenedor flotante para el mensaje de éxito */
+.modal-reserva {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0.9);
+    background: linear-gradient(135deg, #1e1e2f, #2a2a40);
+    border: 2px solid #ff9f43; /* Un color naranja/dorado para "pendiente" */
+    border-radius: 15px;
+    padding: 25px;
+    box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+    text-align: center;
+    color: white;
+    font-family: 'Poppins', sans-serif;
+    opacity: 0;
+    transition: all 0.3s ease-in-out;
+    pointer-events: none;
+    width: 90%;
+    max-width: 400px;
+}
+
+.modal-reserva.mostrar {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+    pointer-events: auto;
+}
+
+.modal-reserva h3 {
+    color: #ff9f43;
+    margin-bottom: 15px;
+    font-size: 22px;
+}
+
+.modal-detalles {
+    background: rgba(255, 255, 255, 0.05);
+    padding: 15px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    text-align: left;
+    font-size: 15px;
+    line-height: 1.6;
+}
+
+.modal-detalles strong {
+    color: #00d2d3;
+}
+
+.badge-pendiente {
+    background-color: #ff9f43;
+    color: #1e1e2f;
+    padding: 3px 8px;
+    border-radius: 5px;
+    font-weight: bold;
+    font-size: 12px;
+}
+
+.btn-cerrar-modal {
+    background-color: #ff9f43;
+    color: #1e1e2f;
+    border: none;
+    padding: 10px 20px;
+    font-weight: bold;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.btn-cerrar-modal:hover {
+    background-color: #ffb366;
+}
+
+/* Fondo oscuro detrás del cartel */
+.overlay-modal {
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    z-index: 999;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+}
+.overlay-modal.mostrar {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+/* 1. Por defecto en pantallas grandes (PC), ocultamos el botón de tres rayas */
+.menu-toggle {
+    display: none;
+    background: none;
+    border: none;
+    color: white;
+    font-size: 30px;
+    cursor: pointer;
+    outline: none;
+}
+
+/* Cuando la pantalla es chica */
+@media (max-width: 768px) {
+    
+    /* Hacemos que el contenedor del Navbar sepa acomodar el botón */
+    .nav-contenedor {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        position: relative;
+        width: 100%;
+        padding: 10px 20px;
+    }
+
+    .menu-toggle {
+        display: block;
+    }
+
+    /* Ocultamos la barra de links por defecto y la posicionamos flotando abajo del navbar */
+    .nav-links {
+        display: none; 
+        flex-direction: column;
+        position: absolute;
+        top: 100%; /* Abajo de la barra */
+        left: 0;
+        width: 100%;
+        background-color: #1e1e2f; /* Cambialo por el color de tu Navbar */
+        padding: 20px 0;
+        box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.4);
+        z-index: 999;
+        text-align: center;
+    }
+
+    .nav-links a {
+        display: block;
+        padding: 15px 0;
+        width: 100%;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    }
+    
+    .nav-links a:last-child {
+        border-bottom: none;
+    }
+
+    
+    .nav-links.active {
+        display: flex; /* Se vuelve visible al toque */
+    }
+}

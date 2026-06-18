@@ -23,14 +23,12 @@ app.use(express.json());
 app.use(cors());
 
 // Conexión a la base de datos (MySQL con Sequelize)
-// sequelize.authenticate() verifica que las credenciales del .env sean correctas
 conectarDB.authenticate()
     .then(() => {
         console.log('Conexión a la base de datos establecida correctamente.');
         
-        // Sincroniza los modelos con la base de datos (crea las tablas si no existen)
-        // El { alter: true } actualiza las tablas si agregas campos en los archivos de Modelos
-        return conectarDB.sync({ alter: true });
+        // PUESTO EN FORCE: TRUE UNA SOLA VEZ PARA ARREGLAR LA TABLA CON EL MODELO VIEJO
+        return conectarDB.sync({ force: true });
     })
     .then(() => {
         console.log('Modelos sincronizados con MySQL.');

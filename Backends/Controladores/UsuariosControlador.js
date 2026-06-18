@@ -5,7 +5,6 @@ exports.registrarUsuario = async (req, res) => {
     try {
         const { nombre, apellido, usuario, email, password, telefono, rol } = req.body;
 
-        // Verificar si el usuario o email ya existen
         const existeUsuario = await Usuario.findOne({ where: { usuario } });
         const existeEmail = await Usuario.findOne({ where: { email } });
 
@@ -13,13 +12,12 @@ exports.registrarUsuario = async (req, res) => {
             return res.status(400).json({ msg: 'El nombre de usuario o el email ya están registrados.' });
         }
 
-        // Crear el usuario en MySQL
         const nuevoUsuario = await Usuario.create({
             nombre,
             apellido,
             usuario,
             email,
-            password, // Nota: Idealmente usar bcryptjs para encriptarla más adelante
+            password, 
             telefono,
             rol
         });
@@ -35,7 +33,7 @@ exports.registrarUsuario = async (req, res) => {
 exports.obtenerUsuarios = async (req, res) => {
     try {
         const usuarios = await Usuario.findAll({
-            attributes: { exclude: ['password'] } // Seguridad: no enviamos la contraseña de vuelta
+            attributes: { exclude: ['password'] } 
         });
         res.json(usuarios);
     } catch (error) {
@@ -56,24 +54,56 @@ exports.loginUsuario = async (req, res) => {
             return res.status(400).json({ msg: 'Usuario o contraseña incorrectos' });
         }
 
-        // 2. Verificar la contraseña (por ahora texto plano, luego le metemos bcrypt)
+        // 2. Verificar la contraseña
         if (usuarioEncontrado.password !== password) {
             return res.status(400).json({ msg: 'Usuario o contraseña incorrectos' });
         }
 
-        // 3. Si todo está bien, responder con los datos del usuario
+        // 3. CORRECCIÓN: Responder enviando todos los datos necesarios para el perfil
         res.json({
             msg: `¡Bienvenido, ${usuarioEncontrado.nombre}!`,
             usuario: {
                 id: usuarioEncontrado.id,
                 nombre: usuarioEncontrado.nombre,
                 apellido: usuarioEncontrado.apellido,
-                usuario: usuarioEncontrado.usuario
+                usuario: usuarioEncontrado.usuario,
+                email: usuarioEncontrado.email,       // <-- Enviado desde la BD
+                telefono: usuarioEncontrado.telefono   // <-- Enviado desde la BD
             }
         });
 
     } catch (error) {
         console.error(error);
         res.status(500).json({ msg: 'Hubo un error en el servidor al iniciar sesión.' });
+    }
+};
+
+// NUEVA FUNCIÓN: Recibe los datos modificados de la pantalla y actualiza MySQL
+exports.actualizarUsuario = async (req, res) => {
+    try {
+        const { id, nombre, usuario, email, telefono } = req.body;
+
+        // Buscar el usuario por su Clave Primaria (ID)
+        const usuarioEncontrado = await Usuario.findByPk(id);
+        if (!usuarioEncontrado) {
+            return res.status(404).json({ msg: 'Usuario no encontrado.' });
+        }
+
+        // Actualizar el registro usando Sequelize
+        await usuarioEncontrado.update({
+            nombre,
+            usuario,
+            email,
+            telefono
+        });
+
+        res.json({ msg: 'Usuario actualizado correctamente', usuario: usuarioEncontrado });
+    } catch (error) {
+        console.error(error);
+        // Validar si intentan cambiar el nombre o correo por uno ya existente
+        if (error.name === 'SequelizeUniqueConstraintError') {
+            return res.status(400).json({ msg: 'El nombre de usuario o email ya está en uso.' });
+        }
+        res.status(500).json({ msg: 'Hubo un error en el servidor al actualizar.' });
     }
 };
