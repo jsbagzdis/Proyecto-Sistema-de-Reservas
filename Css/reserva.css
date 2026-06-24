@@ -6,7 +6,7 @@
 
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background: linear-gradient(2000deg, rgb(124, 82, 4), rgba(255, 255, 255, 1), rgb(20, 5, 231));
+    background: linear-gradient(200deg, rgb(124, 82, 4), rgba(255, 255, 255, 1), rgb(20, 5, 231));
     background-attachment: fixed;
     min-height: 100vh;
     display: flex;
@@ -14,44 +14,51 @@ body {
     align-items: center;
 }
 
+/* ==========================================================================
+   ENCABEZADO Y CONTENEDOR PRINCIPAL
+   ========================================================================== */
 .encabezado {
     width: 100%;
     background-color: transparent;
     color: rgb(255, 255, 255);
-    
     padding: 60px 20px;
     text-align: center;
 }
 
 .encabezado h1 {
     font-size: 2.5rem;
+    -webkit-text-stroke: 1px rgb(0, 0, 0);
     letter-spacing: 2px;
     text-transform: uppercase;
-    text-shadow: 2px 2px 5px rgba(0,0,0,0.4);
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.4);
 }
 
 .encabezado p {
     font-weight: 300;
     opacity: 0.9;
     margin-top: 5px;
+    color: rgb(238, 238, 238);
+    -webkit-text-stroke: 1px rgb(0, 0, 0);
 }
 
 .todo {
     width: 90%;
     max-width: 500px;
-    padding-top: 100px; /* Separación desde arriba */
+    padding-top: 100px;
     padding-bottom: 60px;
-    
-    /* 🔥 Efecto Flotante */
-    background: rgba(255, 255, 255, 0.15); /* Transparencia */
-    backdrop-filter: blur(15px); /* Desenfoque de fondo */
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(15px);
     -webkit-backdrop-filter: blur(15px);
     border-radius: 30px;
     border: 1px solid rgba(255, 255, 255, 0.2);
-    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3); /* Sombra pesada para profundidad */
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
     padding: 40px;
+    margin-bottom: 40px; /* Margen extra inferior */
 }
 
+/* ==========================================================================
+   FORMULARIO
+   ========================================================================== */
 #formularioForm {
     background: rgba(240, 240, 240, 0.95);
     padding: 35px;
@@ -88,6 +95,10 @@ input:focus, select:focus {
     box-shadow: 0 0 8px rgba(0, 48, 73, 0.2);
 }
 
+.input-error {
+    border: 2px solid #ef4444 !important;
+}
+
 #btnEnviar {
     display: block;
     width: 100%;
@@ -103,7 +114,6 @@ input:focus, select:focus {
     cursor: pointer;
     transition: all 0.3s ease;
     box-shadow: 0 6px 15px rgba(0, 48, 73, 0.3);
-    box-sizing: border-box;
 }
 
 #btnEnviar:hover {
@@ -134,10 +144,9 @@ input:focus, select:focus {
     border: 1px solid #dcfce7;
 }
 
-.input-error {
-    border: 2px solid #ef4444 !important;
-}
-
+/* ==========================================================================
+   LISTA DE RESERVAS
+   ========================================================================== */
 .ListaReservas {
     margin-top: 45px;
     background: rgba(223, 222, 227, 0.2);
@@ -162,125 +171,7 @@ input:focus, select:focus {
     justify-content: space-between;
     align-items: center;
     border-left: 6px solid #ff9100;
-}
-
-.btnReservarItem {
-    background-color: #28a745;
-    color: white;
-    border: none;
-    padding: 10px 18px;
-    border-radius: 8px;
-    font-weight: bold;
-    cursor: pointer;
-}
-
-/* ==========================================================================
-   NUEVO MENÚ RESPONSIVO (PLANETA DEPORTE)
-   ========================================================================== */
-
-.navbar-planeta {
-    width: 100%;
-    background: rgba(118, 24, 24, 0.1);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    border-bottom: 1px solid rgba(168, 165, 165, 0.2);
-    position: sticky;
-    top: 0;
-    z-index: 1000;
-}
-
-.nav-contenedor {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 15px 20px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.nav-logo {
-    color: rgb(47, 50, 227);
-    font-weight: 800;
-    font-size: 20px;
-    letter-spacing: 1px;
-    text-transform: uppercase;
-    text-shadow: 1px 1px 3px rgba(255, 255, 255, 0.411);
-}
-
-.nav-links {
-    display: flex;
-    align-items: center;
-    gap: 25px;
-}
-
-.nav-links a {
-    color: rgb(255, 255, 255);
-    text-decoration: none;
-    font-weight: 600;
-    font-size: 14px;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-    transition: color 0.3s ease;
-}
-
-.nav-links a:hover {
-    color: #130741; /* Usa tu color oscuro de los botones al pasar el mouse */
-}
-
-/* Botón Destacado de Cerrar Sesión */
-.nav-links .btn-cerrar-sesion {
-    background-color: #db0a0a;
-    padding: 8px 16px;
-    border-radius: 8px;
-    border: 1px solid rgba(0, 0, 0, 0.532);
-    transition: background 0.3s ease;
-}
-
-.nav-links .btn-cerrar-sesion:hover {
-    background-color: #850707;
-    color: rgb(255, 255, 255);
-}
-
-/* Botón Hamburguesa oculto por defecto (PC) */
-.menu-toggle {
-    display: none;
-    background: none;
-    border: none;
-    color: white;
-    font-size: 28px;
-    cursor: pointer;
-}
-
-/* --- ADAPTACIÓN RESPONSIVA (CELULARES) --- */
-@media (max-width: 768px) {
-    .menu-toggle {
-        display: block; /* Aparece en celulares */
-    }
-
-    .nav-links {
-        display: none; /* Se oculta por defecto en celular */
-        flex-direction: column;
-        width: 100%;
-        position: absolute;
-        top: 100%;
-        left: 0;
-        background: rgba(0, 48, 73, 0.95); /* Fondo sólido oscuro para que se lea perfecto */
-        padding: 20px 0;
-        gap: 20px;
-        border-bottom: 3px solid rgba(255, 166, 2, 1);
-        box-shadow: 0 10px 20px rgba(0,0,0,0.2);
-    }
-
-    /* Clase que va a meter JS para mostrar el menú */
-    .nav-links.active {
-        display: flex;
-    }
-
-    .nav-links a {
-        width: 100%;
-        text-align: center;
-        padding: 10px 0;
-    }
+    gap: 15px; /* Separación entre info y botón */
 }
 
 .turno-info {
@@ -300,9 +191,8 @@ input:focus, select:focus {
     color: #555555;
 }
 
-/* Estilos para el botón que genera el JavaScript */
 .btnReservarItem {
-    background-color: #28a745; /* Verde como el de tu captura */
+    background-color: #28a745;
     color: white;
     border: none;
     padding: 10px 20px;
@@ -311,29 +201,108 @@ input:focus, select:focus {
     border-radius: 6px;
     cursor: pointer;
     transition: background 0.2s ease, transform 0.1s ease;
+    text-align: center;
 }
 
 .btnReservarItem:hover {
-    background-color: #218838; /* Un verde un toque más oscuro al pasar el mouse */
+    background-color: #218838;
 }
 
 .btnReservarItem:active {
-    transform: scale(0.95); /* Efecto de hundido al cliquear */
+    transform: scale(0.95);
 }
 
-/* Estilo por si el botón se deshabilita mientras procesa */
 .btnReservarItem:disabled {
     background-color: #6c757d;
     cursor: not-allowed;
 }
-/* Contenedor flotante para el mensaje de éxito */
+
+/* ==========================================================================
+   BARRA DE NAVEGACIÓN Y MENÚ RESPONSIVO
+   ========================================================================== */
+.navbar-planeta {
+    width: 100%;
+    background: rgba(118, 24, 24, 0.1);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(168, 165, 165, 0.2);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.nav-contenedor {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 15px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative; /* Importante para el menú móvil */
+}
+
+.nav-logo {
+    color: rgb(47, 50, 227);
+    font-weight: 800;
+    font-size: 15px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    text-shadow: 1px 1px 3px rgba(255, 255, 255, 0.411);
+}
+
+.menu-toggle {
+    display: none; /* Oculto en PC */
+    background: none;
+    border: none;
+    color: white;
+    font-size: 28px;
+    cursor: pointer;
+    outline: none;
+}
+
+.nav-links {
+    display: flex;
+    align-items: center;
+    gap: 25px;
+}
+
+.nav-links a {
+    color: rgb(255, 255, 255);
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 14px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    transition: color 0.3s ease;
+}
+
+.nav-links a:hover {
+    color: #130741;
+}
+
+.nav-links .btn-cerrar-sesion {
+    background-color: #db0a0a;
+    padding: 8px 16px;
+    border-radius: 8px;
+    border: 1px solid rgba(0, 0, 0, 0.532);
+    transition: background 0.3s ease;
+}
+
+.nav-links .btn-cerrar-sesion:hover {
+    background-color: #850707;
+    color: rgb(255, 255, 255);
+}
+
+/* ==========================================================================
+   MODAL DE RESERVA
+   ========================================================================== */
 .modal-reserva {
     position: fixed;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%) scale(0.9);
     background: linear-gradient(135deg, #1e1e2f, #2a2a40);
-    border: 2px solid #ff9f43; /* Un color naranja/dorado para "pendiente" */
+    border: 2px solid #ff9f43;
     border-radius: 15px;
     padding: 25px;
     box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.5);
@@ -398,7 +367,6 @@ input:focus, select:focus {
     background-color: #ffb366;
 }
 
-/* Fondo oscuro detrás del cartel */
 .overlay-modal {
     position: fixed;
     top: 0; left: 0; width: 100%; height: 100%;
@@ -408,73 +376,88 @@ input:focus, select:focus {
     pointer-events: none;
     transition: opacity 0.3s ease;
 }
+
 .overlay-modal.mostrar {
     opacity: 1;
     pointer-events: auto;
 }
 
-/* ===================================================
-   ESTILOS PARA EL MENÚ HAMBURGUESA (RESPONSIVE)
-   =================================================== */
-
-/* 1. Por defecto en pantallas grandes (PC), ocultamos el botón de tres rayas */
-.menu-toggle {
-    display: none;
-    background: none;
-    border: none;
-    color: white;
-    font-size: 30px;
-    cursor: pointer;
-    outline: none;
-}
-
-/* 2. Cuando la pantalla es chica (Celulares/Tablets) */
+/* ==========================================================================
+   🔥 MEDIA QUERIES (ADAPTACIÓN PARA MÓVILES Y TABLETS) 🔥
+   ========================================================================== */
 @media (max-width: 768px) {
-    
-    /* Hacemos que el contenedor del Navbar sepa acomodar el botón */
-    .nav-contenedor {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        position: relative;
-        width: 100%;
-        padding: 10px 20px;
+    /* Achicar la fuente del título para que no se desborde */
+    .encabezado h1 {
+        font-size: 1.8rem;
     }
 
-    /* Mostramos el botón hamburguesa ☰ */
+    /* Reducir el padding de la tarjeta principal para aprovechar la pantalla */
+    .todo {
+        padding: 25px 15px; 
+        padding-top: 60px;
+    }
+
+    /* Ajustar el formulario interior */
+    #formularioForm {
+        padding: 20px;
+    }
+
+    /* Modificar las tarjetas de los turnos para que se apilen en vez de aplastarse */
+    .turno-item {
+        flex-direction: column;
+        align-items: flex-start;
+        text-align: center;
+    }
+
+    .turno-info {
+        width: 100%;
+        margin-bottom: 10px;
+        align-items: center; /* Centrar texto en móviles */
+    }
+
+    .btnReservarItem {
+        width: 100%; /* El botón ocupa todo el ancho */
+        padding: 12px;
+    }
+
+    /* Comportamiento del Menú Hamburguesa */
     .menu-toggle {
         display: block;
     }
 
-    /* Ocultamos la barra de links por defecto y la posicionamos flotando abajo del navbar */
     .nav-links {
-        display: none; /* 🔥 Clave: arranca escondido */
+        display: none;
         flex-direction: column;
         position: absolute;
-        top: 100%; /* Se despliega justo abajo de la barra */
+        top: 100%;
         left: 0;
         width: 100%;
-        background-color: #1e1e2f; /* Cambialo por el color de tu Navbar */
+        background: rgba(0, 48, 73, 0.98); /* Color oscuro para legibilidad */
         padding: 20px 0;
         box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.4);
         z-index: 999;
         text-align: center;
+        border-bottom: 3px solid rgba(255, 166, 2, 1);
+        gap: 0; /* Quitamos el gap para usar paddings en su lugar */
     }
 
-    /* Espaciado de los links verticales en el celular */
+    .nav-links.active {
+        display: flex;
+    }
+
     .nav-links a {
         display: block;
-        padding: 15px 0;
         width: 100%;
+        padding: 15px 0;
         border-bottom: 1px solid rgba(255, 255, 255, 0.05);
     }
-    
+
     .nav-links a:last-child {
         border-bottom: none;
     }
-
-    /* 🔥 LA MAGIA: Cuando JS le clava la clase 'active', el CSS lo muestra */
-    .nav-links.active {
-        display: flex; /* Se vuelve visible al toque */
+    
+    .nav-links .btn-cerrar-sesion {
+        margin: 10px auto;
+        width: 80%; /* Hacer el botón de cerrar sesión más amigable para el dedo */
     }
 }
