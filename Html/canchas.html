@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestión de Canchas - Planeta Deporte</title>
+    <link rel="stylesheet" href="../Css/canchas.css">
+</head>
+<body>
+
+    <div class="dashboard-container">
+        
+        <aside class="sidebar">
+            <div class="sidebar-logo">PLANETA DEPORTE</div>
+            <nav class="sidebar-nav">
+                <a href="menu.html" class="nav-item">Inicio</a>
+                <a href="reserva.html" class="nav-item">Reservas</a>
+                <a href="canchas.html" class="nav-item active">Canchas</a>
+                <a href="perfil.html" class="nav-item">Perfil</a>
+                <a href="login.html" class="nav-item" style="color: #ff4d4d; margin-top: auto;">Salir</a>
+            </nav>
+        </aside>
+
+        <main class="main-content">
+            <div class="header-logo">
+                <img src="../Imagenes/logo.png" alt="Logo"> 
+            </div>
+    
+            <section class="content-wrapper">
+                <h1 class="page-title">PANEL DE CONTROL: MIS CANCHAS</h1>
+                <p class="page-subtitle">Agrega y administra tus canchas.</p>
+
+                <div class="controls-bar">
+                    <input type="text" id="input-buscar" placeholder="Buscar cancha por su nombre...">
+                    <button id="btn-buscar" class="btn-add">BUSCAR</button>
+
+                    <select id="select-deportes">
+                        <option value="">Filtrar por Deporte</option>
+                    </select>
+                    <button class="btn-add" id="btn-abrir-modal">+ AGREGAR NUEVA CANCHA</button>
+                </div>
+
+                <div id="contenedor-canchas" class="canchas-grid">
+                    </div>
+            </section>
+        </main>
+    </div>
+
+    <div id="modal-cancha" class="modal-overlay hidden">
+        <div class="modal-content">
+            <span class="close-btn" id="btn-cerrar-modal">&times;</span>
+            <h2>Crear Nueva Cancha</h2>
+            
+            <div class="form-group">
+                <label>Nombre de la cancha</label>
+                <input type="text" id="input-nombre" placeholder="Ej: Cancha 1">
+            </div>
+            
+            <div class="form-group">
+                <label>Ubicación</label>
+                <input type="text" id="input-ubicacion" placeholder="Ej: Predio Norte">
+            </div>
+            
+            <div class="form-group">
+                <label>Tarifa por hora ($)</label>
+                <input type="number" id="input-tarifa" placeholder="Ej: 5000">
+            </div>
+            
+            <div class="form-group">
+            <label>Deporte</label>
+            <input type="text" id="input-deporte" list="lista-deportes" placeholder="Ej: Fútbol, Padel...">
+            <datalist id="lista-deportes"></datalist>
+            </div>
+            
+            <button class="btn-add btn-guardar-modal" id="btn-guardar-cancha">GUARDAR CANCHA</button>
+        </div>
+    </div>
+
+    <div id="modal-turnos" class="modal-overlay hidden">
+    <div class="modal-content">
+        <span class="close-btn" onclick="document.getElementById('modal-turnos').classList.add('hidden')">&times;</span>
+        <h2>Gestión de Turnos</h2>
+        <p id="titulo-cancha-turnos">Cancha: </p>
+        
+        <div id="lista-turnos" style="margin: 20px 0; max-height: 200px; overflow-y: auto;">
+            </div>
+
+        <hr>
+        <h3>Agregar nuevo turno</h3>
+        <div class="form-group">
+            <label>Hora de inicio</label>
+            <input type="time" id="input-nuevo-turno">
+        </div>
+        <button class="btn-add" onclick="guardarTurno()">Agregar Horario</button>
+
+        <label>Precio:</label>
+        <input type="number" id="nuevo-precio" placeholder="Ej: 5000">
+
+    </div>
+</div>
+
+    <script src="../JavaScript/canchas.js"></script>
+</body>
+</html>

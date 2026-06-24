@@ -3,6 +3,12 @@ const Cancha = require('../Modelos/Canchas');
 // 1. Crear una nueva cancha
 exports.crearCancha = async (req, res) => {
     try {
+        const canchaExiste = await Cancha.findOne({ where: { nombre: req.body.nombre }});
+        if(canchaExiste){
+            return res.status(400).json({ msg: 'Ya existe una cancha con ese nombre'});
+        }
+
+        
         const nuevaCancha = await Cancha.create({
             nombre: req.body.nombre,
             ubicacion: req.body.ubicacion,
@@ -11,11 +17,7 @@ exports.crearCancha = async (req, res) => {
             DeporteId: req.body.DeporteId
         });
 
-        // Validar que no exista otra cancha con el mismo nombre
-        const canchaExiste = await Cancha.findOne({ where: { nombre: req.body.nombre } });
-        if (canchaExiste) {
-            return res.status(400).json({ msg: 'Ya existe una cancha con ese nombre.' });
-        }
+       
         res.status(201).json({ msg: 'Cancha creada con éxito', cancha: nuevaCancha });
     } catch (error) {
         console.error(error);

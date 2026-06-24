@@ -1,0 +1,195 @@
+* { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', sans-serif; }
+
+body {
+   background: linear-gradient(135deg, 
+        #0a192f 0%, 
+        #1488cc 35%, 
+        #ff9100 70%, 
+        #f9d423 90%, 
+        #ffffff 100%
+    );
+    background-attachment: fixed;
+    min-height: 100vh;
+    /* Esto ayuda a que el degradado no se vea pixelado */
+    background-size: cover;
+}
+
+.dashboard-container { display: flex; min-height: 100vh; }
+
+/* Sidebar */
+.sidebar { 
+   width: 250px; 
+    background: rgba(10, 25, 47, 0.9); 
+    color: white; 
+    padding: 20px 0;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+.sidebar-logo { text-align: center; padding: 20px; color: #ff9100; font-weight: bold; border-bottom: 1px solid rgba(255,255,255,0.1); }
+.sidebar-nav {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 20px;
+}
+.nav-item { color: #ccc; text-decoration: none; padding: 15px 25px; display: block; }
+.nav-item:hover, .nav-item.active { background: rgba(255, 255, 255, 0.1); color: #ff9100; border-left: 4px solid #ff9100; }
+
+/* Main Content */
+.main-content { 
+    flex: 1;
+    position: relative; 
+    padding: 40px;
+    display: flex;
+    flex-direction: column;
+ }
+
+.content-wrapper {
+  background: rgba(255, 255, 255, 0.85); 
+    backdrop-filter: blur(10px);
+    border-radius: 15px;
+    padding: 40px;
+    margin: 20px; /* Cambiado de 100px auto a un margen general más flexible */
+    box-shadow: 0 8px 32px rgba(0,0,0,0.2);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+/* Controles */
+.controls-bar { display: flex; gap: 10px; margin-bottom: 25px; }
+.controls-bar input, .controls-bar select { 
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px; 
+    flex: 1;
+    margin-top: 10px; 
+}
+.btn-add {
+     background: #ff9100; color: white; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer;
+     }
+
+/* Grid de tarjetas */
+.canchas-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px; }
+.cancha-card { background: white; border-radius: 10px; padding: 15px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
+.cancha-card img { width: 100%; height: 120px; object-fit: cover; border-radius: 5px; margin-bottom: 10px; }
+.btn-detalle { display: block; width: 100%; padding: 10px; background: #0a192f; color: white; text-align: center; border-radius: 5px; margin-top: 10px; text-decoration: none; }
+
+.header-logo {
+  position: fixed; 
+    top: 50%;
+    left: calc(50% + 125px); 
+    transform: translate(-50%, -50%);
+    z-index: -1; 
+    pointer-events: none;
+    filter: grayscale(20%);
+}
+.header-logo img {
+   width: 50vw;     
+    max-width: 800px;  
+    height: auto;
+    opacity: 0.4;
+}
+
+.nav-links { display: flex; gap: 20px; margin-left: auto; }
+.nav-links a { color: white; text-decoration: none; font-weight: bold; }
+
+.menu-toggle { display: none; color: white; font-size: 30px; cursor: pointer; }
+
+/* =========================================
+   VENTANA FLOTANTE (MODAL)
+   ========================================= */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(10, 25, 47, 0.8); /* Fondo oscuro semitransparente */
+    backdrop-filter: blur(5px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+/* Esta clase oculta el modal cuando no se usa */
+.modal-overlay.hidden {
+    display: none;
+}
+
+.modal-content {
+    background: white;
+    padding: 30px;
+    border-radius: 15px;
+    width: 90%;
+    max-width: 400px;
+    position: relative;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+    animation: aparecer 0.3s ease-out; /* Pequeña animación */
+}
+
+@keyframes aparecer {
+    from { transform: translateY(-20px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+}
+
+.modal-content h2 { color: #0a192f; margin-bottom: 20px; text-align: center; }
+
+.close-btn {
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    font-size: 24px;
+    cursor: pointer;
+    color: #666;
+}
+
+.close-btn:hover { color: #ff4d4d; }
+
+.form-group { margin-bottom: 15px; }
+.form-group label { display: block; margin-bottom: 5px; color: #333; font-weight: bold; font-size: 0.9rem; }
+.form-group input, .form-group select { width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 5px; }
+
+.btn-guardar-modal { width: 100%; margin-top: 10px; font-size: 1.1rem; }
+
+/* Responsive */
+@media (max-width: 768px) {
+    .dashboard-container { 
+        flex-direction: column; 
+    }
+    
+    .sidebar { 
+        width: 100%; 
+        height: auto; 
+        min-height: auto; /* ¡ESTA ES LA CLAVE! Cancela la altura gigante */
+        padding: 10px 0;
+    }
+
+    /* Opcional: Para que los links del sidebar no queden tan grandes en móvil */
+    .sidebar-nav {
+        flex-direction: row; /* Pone los links uno al lado del otro */
+        flex-wrap: wrap;     /* Permite que bajen de línea si no caben */
+        justify-content: center;
+        gap: 5px;
+    }
+    .nav-item { padding: 10px; font-size: 14px; border-left: none;}
+    .nav-item:hover, .nav-item.active { border-bottom: 3px solid #ff9100; border-left: none; }
+
+
+    /* Apila el buscador y el botón en lugar de aplastarlos */
+    .controls-bar {
+        flex-direction: column;
+    }
+    .page-title {
+        font-size: 22px; /* Tamaño más amigable para pantallas pequeñas */
+        margin-bottom: 10px;
+    }
+    .page-subtitle {
+        font-size: 14px; /* Un poco más pequeño para que no estorbe */
+        margin-bottom: 20px;
+    }
+    .content-wrapper {
+        padding: 20px; /* Antes estaba en 40px */
+        margin: 15px;  /* Margen exterior un poco más sutil */
+    }
+}
