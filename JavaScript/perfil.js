@@ -1,6 +1,20 @@
 document.addEventListener("DOMContentLoaded", function() {
     //Recupera los datos que el Login guardó en la sesión
-    const datosSesion = sessionStorage.getItem("usuarioLogueado");
+    const datosSesion = localStorage.getItem("usuarioLogueado");
+
+     if (datosSesion) {
+        const usuario = JSON.parse(datosSesion);
+        console.log("Datos del usuario en localStorage:", usuario);
+
+        if (usuario.rol === 'admin' || usuario.rol === 'administrador') {
+        const navMisCanchas = document.getElementById('nav-mis-canchas');
+
+        if (navMisCanchas) {
+                navMisCanchas.style.display = 'inline-block'; 
+            }
+        }
+    }
+
 
     // Si no hay datos, redirige al Login
     if (!datosSesion) {
@@ -28,7 +42,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
 // MODIFICAR Y GUARDAR LOS DATOS NUEVOS
 function guardarCambios() {
-    const datosSesion = sessionStorage.getItem("usuarioLogueado");
+    const datosSesion = localStorage.getItem("usuarioLogueado");
     const usuarioActual = JSON.parse(datosSesion);
 
     // Capturamos lo que el usuario haya modificado o escrito en la pantalla

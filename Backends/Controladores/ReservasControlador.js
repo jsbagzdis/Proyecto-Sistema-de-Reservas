@@ -83,30 +83,32 @@ exports.obtenerTurnosDisponibles = async (req, res) => {
     try {
         const { deporte, fecha, duracion } = req.query;
 
-        // 1. Validación inicial
+       
         if (!deporte || !fecha || !duracion) {
             return res.status(400).json({ msg: 'Faltan parámetros de búsqueda (deporte, fecha, duracion).' });
         }
 
-        // 2. Consulta SQL pura para cruzar canchas y horarios fijos, descartando las que ya estén reservadas ese día a esa hora
-        // Usamos REPLacements para blindar la query contra inyecciones SQL
+        
         const query = `
             SELECT 
                 c.id AS canchaId,
                 c.nombre AS canchaNombre,
+                c.ubicacion AS canchaUbicacion,
+                d.nombre AS canchaDeporte,
                 c.tarifa AS tarifaBase,
-                TIME_FORMAT(h.horaInicio, '%H:%i') AS hora
+                TIME_FORMAT(t.hora, '%H:%i') AS hora
             FROM canchas c
-            INNER JOIN horarios_canchas h ON c.id = h.canchaId
-            WHERE c.deporte = :deporte
+            INNER JOIN turnos t ON c.id = t.canchaId
+            INNER JOIN deportes d ON c.DeporteId = d.id
+            WHERE d.nombre = :deporte
               AND NOT EXISTS (
                   SELECT 1 
                   FROM reservas r 
                   WHERE r.CanchaId = c.id 
                     AND r.fecha = :fecha 
-                    AND TIME_FORMAT(r.horario, '%H:%i') = TIME_FORMAT(h.horaInicio, '%H:%i')
+                    AND TIME_FORMAT(r.horario, '%H:%i') = TIME_FORMAT(t.hora, '%H:%i')
               )
-            ORDER BY h.horaInicio ASC;
+            ORDER BY t.hora ASC;
         `;
 
         const [resultados] = await conectarDB.query(query, {
@@ -121,6 +123,8 @@ exports.obtenerTurnosDisponibles = async (req, res) => {
             return {
                 canchaId: turno.canchaId,
                 canchaNombre: turno.canchaNombre,
+                canchaUbicacion: turno.canchaUbicacion,
+                canchaDeporte: turno.canchaDeporte,
                 hora: turno.hora,
                 tarifaTotal
             };

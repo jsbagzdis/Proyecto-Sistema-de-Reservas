@@ -39,7 +39,7 @@ form.addEventListener("submit", async function(e) {
     msg.textContent = datos.msg;
     msg.className = "correcto";
 
-    sessionStorage.setItem("usuarioLogueado", JSON.stringify(datos.usuario));
+    localStorage.setItem("usuarioLogueado", JSON.stringify(datos.usuario));
 
     setTimeout(() => {
       window.location.href = "../Html/reserva.html";
