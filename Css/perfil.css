@@ -2,7 +2,7 @@
 /* Contenedor principal del perfil */
 body {
     /* Corregido el ángulo a 135deg para un degradado diagonal limpio */
-    background: linear-gradient(335deg, rgba(255, 166, 2, 1), rgba(255, 255, 255, 1), rgb(20, 5, 231));
+    background: linear-gradient(200deg, rgb(124, 82, 4), rgba(255, 255, 255, 1), rgb(20, 5, 231));
     min-height: 100vh;
     display: flex;
     flex-direction: column;
@@ -149,10 +149,10 @@ body {
    ========================================================================== */
 .navbar-planeta {
     width: 100%;
-    background: rgba(255, 255, 255, 0.1);
+    background: rgba(118, 24, 24, 0.1);
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    border-bottom: 1px solid rgba(168, 165, 165, 0.2);
     position: sticky;
     top: 0;
     z-index: 1000;
@@ -165,15 +165,26 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    position: relative; /* Importante para el menú móvil */
 }
 
 .nav-logo {
-    color: white;
+    color: rgb(47, 50, 227);
     font-weight: 800;
-    font-size: 20px;
+    font-size: 15px;
     letter-spacing: 1px;
     text-transform: uppercase;
-    text-shadow: 1px 1px 3px rgba(0,0,0,0.3);
+    text-shadow: 1px 1px 3px rgba(255, 255, 255, 0.411);
+}
+
+.menu-toggle {
+    display: none; /* Oculto en PC */
+    background: none;
+    border: none;
+    color: white;
+    font-size: 28px;
+    cursor: pointer;
+    outline: none;
 }
 
 .nav-links {
@@ -183,7 +194,7 @@ body {
 }
 
 .nav-links a {
-    color: white;
+    color: rgb(255, 255, 255);
     text-decoration: none;
     font-weight: 600;
     font-size: 14px;
@@ -193,37 +204,23 @@ body {
 }
 
 .nav-links a:hover {
-    color: #003049;
+    color: #130741;
 }
 
-/* Botón Destacado de Cerrar Sesión en Navbar */
 .nav-links .btn-cerrar-sesion {
-    background-color: #b91c1c;
+    background-color: #db0a0a;
     padding: 8px 16px;
     border-radius: 8px;
-    border: 1px solid rgba(255, 255, 255, 0.3);
+    border: 1px solid rgba(0, 0, 0, 0.532);
     transition: background 0.3s ease;
 }
 
 .nav-links .btn-cerrar-sesion:hover {
-    background-color: #ef4444;
-    color: white;
+    background-color: #850707;
+    color: rgb(255, 255, 255);
 }
 
-/* Botón de Menú (Hamburguesa) - Oculto en PC por defecto */
-.menu-toggle {
-    display: none;
-    background: none;
-    border: none;
-    color: white;
-    font-size: 30px;
-    cursor: pointer;
-    outline: none;
-}
 
-/* ==========================================================================
-   TURNOS Y RESERVAS (Otros elementos de la UI)
-   ========================================================================== */
 .turno-info {
     display: flex;
     flex-direction: column;

@@ -14,9 +14,7 @@ body {
     align-items: center;
 }
 
-/* ==========================================================================
-   ENCABEZADO Y CONTENEDOR PRINCIPAL
-   ========================================================================== */
+/*ENCABEZADO Y CONTENEDOR PRINCIPAL*/
 .encabezado {
     width: 100%;
     background-color: transparent;
@@ -56,9 +54,7 @@ body {
     margin-bottom: 40px; /* Margen extra inferior */
 }
 
-/* ==========================================================================
-   FORMULARIO
-   ========================================================================== */
+/* FORMULARIO*/
 #formularioForm {
     background: rgba(240, 240, 240, 0.95);
     padding: 35px;
@@ -144,9 +140,7 @@ input:focus, select:focus {
     border: 1px solid #dcfce7;
 }
 
-/* ==========================================================================
-   LISTA DE RESERVAS
-   ========================================================================== */
+/*LISTA DE RESERVAS*/
 .ListaReservas {
     margin-top: 45px;
     background: rgba(223, 222, 227, 0.2);
@@ -217,9 +211,7 @@ input:focus, select:focus {
     cursor: not-allowed;
 }
 
-/* ==========================================================================
-   BARRA DE NAVEGACIÓN Y MENÚ RESPONSIVO
-   ========================================================================== */
+/*  BARRA DE NAVEGACIÓN Y MENÚ RESPONSIVO */
 .navbar-planeta {
     width: 100%;
     background: rgba(118, 24, 24, 0.1);
@@ -293,9 +285,7 @@ input:focus, select:focus {
     color: rgb(255, 255, 255);
 }
 
-/* ==========================================================================
-   MODAL DE RESERVA
-   ========================================================================== */
+/*MODAL DE RESERVA*/
 .modal-reserva {
     position: fixed;
     top: 50%;
@@ -382,9 +372,7 @@ input:focus, select:focus {
     pointer-events: auto;
 }
 
-/* ==========================================================================
-   🔥 MEDIA QUERIES (ADAPTACIÓN PARA MÓVILES Y TABLETS) 🔥
-   ========================================================================== */
+
 @media (max-width: 768px) {
     /* Achicar la fuente del título para que no se desborde */
     .encabezado h1 {

@@ -80,7 +80,7 @@ button {
     margin-top: 20px;
     width: 100%;
     padding: 15px;
-    border: none;/* Elimina el borde predeterminado */
+    border: none;
     border-radius: 8px;
     font-size: 15px;
     font-weight: bold;
@@ -133,7 +133,7 @@ button {
     color: #ffffff; 
 }
 
-/* Estado de ERROR*/
+/* ERROR*/
 .error {
     display: block !important;
     background-color: #c81e1e; 
@@ -162,13 +162,13 @@ button {
     align-items: center;
 }
 
-/*ÉXITO*/
+
 .correcto {
     display: block !important;
     background-color: #0e9f6e; 
 }
 
-/* Icono circular con tilde para ÉXITO */
+/* Icono EXITO */
 .correcto::before {
     content: "✓"; 
     position: absolute;

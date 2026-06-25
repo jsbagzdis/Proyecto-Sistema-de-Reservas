@@ -1,18 +1,17 @@
 const Usuario = require("../Modelos/Usuarios");
 
 // Registrar un nuevo usuario
-exports.registrarUsuario = async (req, res) => {
+exports.registrarUsuario = async (req, res) => { //Recibe datos del usuario , lo procesa y devuelve respuesta
   try {
     const { nombre, apellido, usuario, email, password, telefono, rol } =
-      req.body;
+      req.body; 
 
     const existeUsuario = await Usuario.findOne({ where: { usuario } });
     const existeEmail = await Usuario.findOne({ where: { email } });
 
     if (existeUsuario || existeEmail) {
-      return res
-        .status(400)
-        .json({ msg: "El nombre de usuario o el email ya están registrados." });
+      return res.status(400).json({ 
+        msg: "El nombre de usuario o el email ya están registrados." });
     }
 
     const nuevoUsuario = await Usuario.create({
@@ -25,9 +24,7 @@ exports.registrarUsuario = async (req, res) => {
       rol,
     });
 
-    res
-      .status(201)
-      .json({
+    res.status(201).json({
         msg: "Usuario registrado con éxito",
         usuarioId: nuevoUsuario.id,
       });
@@ -37,7 +34,7 @@ exports.registrarUsuario = async (req, res) => {
   }
 };
 
-// Obtener todos los usuarios
+
 exports.obtenerUsuarios = async (req, res) => {
   try {
     const usuarios = await Usuario.findAll({
@@ -50,24 +47,21 @@ exports.obtenerUsuarios = async (req, res) => {
   }
 };
 
-// Función para iniciar sesión (Login)
+
 exports.loginUsuario = async (req, res) => {
   try {
     const { usuario, password } = req.body;
 
-    // 1. Buscar si el usuario existe en MySQL
     const usuarioEncontrado = await Usuario.findOne({ where: { usuario } });
 
     if (!usuarioEncontrado) {
       return res.status(400).json({ msg: "Usuario o contraseña incorrectos" });
     }
 
-    // 2. Verificar la contraseña
     if (usuarioEncontrado.password !== password) {
       return res.status(400).json({ msg: "Usuario o contraseña incorrectos" });
     }
 
-    // 3. CORRECCIÓN: Responder enviando todos los datos necesarios para el perfil
     res.json({
       msg: `¡Bienvenido, ${usuarioEncontrado.nombre}!`,
       usuario: {
@@ -86,7 +80,7 @@ exports.loginUsuario = async (req, res) => {
   }
 };
 
-// NUEVA FUNCIÓN: Recibe los datos modificados de la pantalla y actualiza MySQL
+//Recibe  datos modificados y actualiza SQL
 exports.actualizarUsuario = async (req, res) => {
   try {
     const { id, nombre, usuario, email } = req.body;

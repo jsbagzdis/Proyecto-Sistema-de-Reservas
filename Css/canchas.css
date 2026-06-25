@@ -10,7 +10,6 @@ body {
     );
     background-attachment: fixed;
     min-height: 100vh;
-    /* Esto ayuda a que el degradado no se vea pixelado */
     background-size: cover;
 }
 
@@ -95,9 +94,7 @@ body {
 
 .menu-toggle { display: none; color: white; font-size: 30px; cursor: pointer; }
 
-/* =========================================
-   VENTANA FLOTANTE (MODAL)
-   ========================================= */
+
 .modal-overlay {
     position: fixed;
     top: 0;
@@ -161,14 +158,13 @@ body {
     .sidebar { 
         width: 100%; 
         height: auto; 
-        min-height: auto; /* ¡ESTA ES LA CLAVE! Cancela la altura gigante */
+        min-height: auto; 
         padding: 10px 0;
     }
 
-    /* Opcional: Para que los links del sidebar no queden tan grandes en móvil */
     .sidebar-nav {
         flex-direction: row; /* Pone los links uno al lado del otro */
-        flex-wrap: wrap;     /* Permite que bajen de línea si no caben */
+        flex-wrap: wrap;     
         justify-content: center;
         gap: 5px;
     }
@@ -176,20 +172,20 @@ body {
     .nav-item:hover, .nav-item.active { border-bottom: 3px solid #ff9100; border-left: none; }
 
 
-    /* Apila el buscador y el botón en lugar de aplastarlos */
+   
     .controls-bar {
         flex-direction: column;
     }
     .page-title {
-        font-size: 22px; /* Tamaño más amigable para pantallas pequeñas */
+        font-size: 22px; /* Tamaño para pantallas pequeñas */
         margin-bottom: 10px;
     }
     .page-subtitle {
-        font-size: 14px; /* Un poco más pequeño para que no estorbe */
+        font-size: 14px; 
         margin-bottom: 20px;
     }
     .content-wrapper {
-        padding: 20px; /* Antes estaba en 40px */
-        margin: 15px;  /* Margen exterior un poco más sutil */
+        padding: 20px;
+        margin: 15px;  
     }
 }

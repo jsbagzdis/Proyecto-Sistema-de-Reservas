@@ -26,7 +26,7 @@ document.addEventListener("DOMContentLoaded", function() {
     // Convertimos a un objeto JavaScript
     const usuario = JSON.parse(datosSesion);
 
-    // 3. CARGAMOS LOS DATOS DE LA BD EN LAS CAJAS
+    // CARGAMOS LOS DATOS DE LA BD EN LAS CAJAS
     // .value hace que el texto sea visible y completamente modificable por el usuario
     document.getElementById("perfilNombre").value = usuario.nombre || "";
     document.getElementById("perfilUsuario").value = usuario.usuario || "";
