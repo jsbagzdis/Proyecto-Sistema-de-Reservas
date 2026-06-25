@@ -235,30 +235,38 @@ async function crearCancha() {
         // A. Verificar si el deporte existe
         const resDep = await fetch(`${API_URL}/deportes`);
         const deportes = await resDep.json();
-        let deporte = deportes.find(d => d.nombre.toLowerCase() === nombreDeporte.toLowerCase());
+        
+        // CORRECCIÓN: Contemplar si viene como "nombre" o "Nombre"
+        let deporte = deportes.find(d => {
+            const nombreEnDB = d.nombre || d.Nombre;
+            return nombreEnDB && nombreEnDB.toLowerCase() === nombreDeporte.toLowerCase();
+        });
 
         // B. Si no existe, crearlo
         if (!deporte) {
             const resNuevo = await fetch(`${API_URL}/deportes`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ nombre: nombreDeporte })
+                body: JSON.stringify({ nombre: nombreDeporte }) 
             });
             deporte = await resNuevo.json();
         }
+
+        
+        const deporteIdFinal = deporte.id || deporte.Id || deporte.ID;
 
         // C. Crear la cancha vinculada al deporte
         const resCancha = await fetch(`${API_URL}/canchas`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ nombre, ubicacion, tarifa, DeporteId: deporte.id })
+            body: JSON.stringify({ nombre, ubicacion, tarifa, DeporteId: deporteIdFinal })
         });
 
         if (resCancha.ok) {
             alert("Cancha creada exitosamente");
             document.getElementById('modal-cancha').classList.add('hidden');
             
-            // Limpiar los inputs para que no queden escritos
+           
             document.getElementById('input-nombre').value = '';
             document.getElementById('input-ubicacion').value = '';
             document.getElementById('input-tarifa').value = '';
@@ -272,6 +280,6 @@ async function crearCancha() {
         }
     } catch (error) {
         console.error("Error:", error);
-        alert("Hubo un error inesperado.");
+        alert("Hubo un error inesperado. Revisa la consola.");
     }
 }
