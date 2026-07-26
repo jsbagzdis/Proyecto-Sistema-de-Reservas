@@ -1,25 +1,87 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
 
-/* Contenedor principal del perfil */
+/* ESTRUCTURA PRINCIPAL Y BODY */
 body {
-    /* Corregido el ángulo a 135deg para un degradado diagonal limpio */
     background: linear-gradient(200deg, rgb(124, 82, 4), rgba(255, 255, 255, 1), rgb(20, 5, 231));
+    background-attachment: fixed;
     min-height: 100vh;
+    display: flex; /* Mantiene la sidebar al lado del contenido */
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* SIDEBAR )*/
+.sidebar {
+    width: 250px;
+    background: rgba(10, 25, 47, 0.9);
+    color: white;
+    padding: 20px 0;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+}
+
+.sidebar-logo { 
+    text-align: center; 
+    padding: 20px; 
+    color: #ff9100; 
+    font-weight: bold; 
+    border-bottom: 1px solid rgba(255,255,255,0.1); 
+}
+
+.sidebar-nav {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.nav-item, 
+.sidebar-nav a { 
+    color: #ccc; 
+    text-decoration: none; 
+    padding: 15px 25px; 
+    display: block; 
+    transition: all 0.3s ease;
+}
+
+.nav-item:hover, 
+.nav-item.active,
+.sidebar-nav a:hover,
+.sidebar-nav a.active { 
+    background: rgba(255, 255, 255, 0.1); 
+    color: #ff9100; 
+    border-left: 4px solid #ff9100; 
+}
+
+/* CONTENIDO PRINCIPAL*/
+.main-wrapper {
+    flex: 1;
+    margin-left: 250px; /* Evita que la sidebar fija tape el contenido */
+    width: calc(100% - 250px);
     display: flex;
     flex-direction: column;
     align-items: center;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    margin: 0;
+    padding: 20px;
 }
 
+/* Contenedor del perfil  */
 .perfil-container {
-    width: 90%;
+    width: 100%;
     max-width: 500px;
     margin-top: 40px;
     padding-bottom: 60px;
     animation: cargarPerfil 0.5s ease-out;
 }
 
-/* Título principal de la sección */
+/* Título principal  */
 .perfil-container h2 {
     color: #ffffff;
     text-align: center;
@@ -30,7 +92,7 @@ body {
     margin-bottom: 25px;
 }
 
-/* Tarjeta contenedora de los datos */
+/* Tarjeta de datos */
 .tarjeta-perfil {
     background: rgba(255, 255, 255, 0.95);
     padding: 35px;
@@ -40,18 +102,17 @@ body {
     margin-bottom: 20px;
 }
 
-/* Estructura de cada grupo del formulario */
 .form-group {
     display: flex;
-    flex-direction: column; /* Cambiado a columna para que el input quede abajo del label */
+    flex-direction: column;
     margin-bottom: 20px;
 }
 
 .form-group:last-child {
-    margin-bottom: 0; /* Quita el margen al último input */
+    margin-bottom: 0;
 }
 
-/* Estilo para las etiquetas (Labels) */
+/* Estilo para Label */
 .form-group label {
     color: #003049;
     font-weight: 700;
@@ -61,7 +122,7 @@ body {
     margin-bottom: 8px;
 }
 
-/* Estilo para los Inputs (Campos editables) */
+/* Estilo para los Inputs */
 .form-group input {
     background: #f8f9fa;
     color: #333333;
@@ -76,24 +137,18 @@ body {
     width: 100%;
 }
 
-/* Efecto de enfoque cuando el usuario hace clic para escribir */
 .form-group input:focus {
     background: #ffffff;
     border-color: #ffa602;
     box-shadow: 0 0 8px rgba(255, 166, 2, 0.3);
 }
 
-/* Estilización del Placeholder (texto de guía opaco) */
 .form-group input::placeholder {
     color: #a0a0a0;
     font-weight: 400;
 }
 
-/* ==========================================================================
-   ESTILOS DE BOTONES
-   ========================================================================== */
-
-/* Estilo Base Compartido para Botones */
+/* BOTONES */
 .btn-guardar, .btn-cerrar {
     display: block;
     width: 100%;
@@ -109,7 +164,6 @@ body {
     text-align: center;
 }
 
-/* Botón de Guardar Cambios */
 .btn-guardar {
     background: #0284c7; 
     color: white;
@@ -127,7 +181,6 @@ body {
     transform: scale(0.98);
 }
 
-/* Botón de Cerrar Sesión (Rojo Destacado) */
 .btn-cerrar {
     background: #b91c1c;
     color: white;
@@ -144,125 +197,6 @@ body {
     transform: scale(0.98);
 }
 
-/* ==========================================================================
-   BARRA DE NAVEGACIÓN SUPERIOR
-   ========================================================================== */
-.navbar-planeta {
-    width: 100%;
-    background: rgba(118, 24, 24, 0.1);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    border-bottom: 1px solid rgba(168, 165, 165, 0.2);
-    position: sticky;
-    top: 0;
-    z-index: 1000;
-}
-
-.nav-contenedor {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 15px 20px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    position: relative; /* Importante para el menú móvil */
-}
-
-.nav-logo {
-    color: rgb(47, 50, 227);
-    font-weight: 800;
-    font-size: 15px;
-    letter-spacing: 1px;
-    text-transform: uppercase;
-    text-shadow: 1px 1px 3px rgba(255, 255, 255, 0.411);
-}
-
-.menu-toggle {
-    display: none; /* Oculto en PC */
-    background: none;
-    border: none;
-    color: white;
-    font-size: 28px;
-    cursor: pointer;
-    outline: none;
-}
-
-.nav-links {
-    display: flex;
-    align-items: center;
-    gap: 25px;
-}
-
-.nav-links a {
-    color: rgb(255, 255, 255);
-    text-decoration: none;
-    font-weight: 600;
-    font-size: 14px;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-    transition: color 0.3s ease;
-}
-
-.nav-links a:hover {
-    color: #130741;
-}
-
-.nav-links .btn-cerrar-sesion {
-    background-color: #db0a0a;
-    padding: 8px 16px;
-    border-radius: 8px;
-    border: 1px solid rgba(0, 0, 0, 0.532);
-    transition: background 0.3s ease;
-}
-
-.nav-links .btn-cerrar-sesion:hover {
-    background-color: #850707;
-    color: rgb(255, 255, 255);
-}
-
-
-.turno-info {
-    display: flex;
-    flex-direction: column;
-    gap: 4px;
-}
-
-.turno-hora {
-    color: #003049;
-    font-size: 1.2rem;
-    font-weight: 700;
-}
-
-.turno-detalle {
-    font-size: 0.9rem;
-    color: #555555;
-}
-
-.btnReservarItem {
-    background-color: #28a745;
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    font-size: 14px;
-    font-weight: bold;
-    border-radius: 6px;
-    cursor: pointer;
-    transition: background 0.2s ease, transform 0.1s ease;
-}
-
-.btnReservarItem:hover {
-    background-color: #218838;
-}
-
-.btnReservarItem:active {
-    transform: scale(0.95);
-}
-
-.btnReservarItem:disabled {
-    background-color: #6c757d;
-    cursor: not-allowed;
-}
-
 /* Modales y Notificaciones */
 .modal-reserva {
     position: fixed;
@@ -274,7 +208,7 @@ body {
     border-radius: 15px;
     padding: 25px;
     box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.5);
-    z-index: 1000;
+    z-index: 1001;
     text-align: center;
     color: white;
     font-family: 'Poppins', sans-serif;
@@ -289,50 +223,6 @@ body {
     opacity: 1;
     transform: translate(-50%, -50%) scale(1);
     pointer-events: auto;
-}
-
-.modal-reserva h3 {
-    color: #ff9f43;
-    margin-bottom: 15px;
-    font-size: 22px;
-}
-
-.modal-detalles {
-    background: rgba(255, 255, 255, 0.05);
-    padding: 15px;
-    border-radius: 10px;
-    margin-bottom: 20px;
-    text-align: left;
-    font-size: 15px;
-    line-height: 1.6;
-}
-
-.modal-detalles strong {
-    color: #00d2d3;
-}
-
-.badge-pendiente {
-    background-color: #ff9f43;
-    color: #1e1e2f;
-    padding: 3px 8px;
-    border-radius: 5px;
-    font-weight: bold;
-    font-size: 12px;
-}
-
-.btn-cerrar-modal {
-    background-color: #ff9f43;
-    color: #1e1e2f;
-    border: none;
-    padding: 10px 20px;
-    font-weight: bold;
-    border-radius: 8px;
-    cursor: pointer;
-    transition: background 0.2s;
-}
-
-.btn-cerrar-modal:hover {
-    background-color: #ffb366;
 }
 
 .overlay-modal {
@@ -350,32 +240,55 @@ body {
     pointer-events: auto;
 }
 
-
-/*Responsive celulares*/
-
+/* RESPONSIVE */
 @media (max-width: 768px) {
-    .nav-contenedor {
-        padding: 10px;
+    body {
+        flex-direction: column;
     }
 
-    .nav-logo {
-        font-size: 16px;
+    .sidebar {
+        width: 100%;
+        min-height: auto;
+        position: relative;
+        padding: 10px 0;
+        border-right: none;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
     }
 
-    .nav-links {
-        gap: 10px;
+    .sidebar-nav {
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 5px;
+        margin-top: 0;
     }
 
-    .nav-links a {
-        font-size: 11px;
+    .nav-item,
+    .sidebar-nav a {
+        padding: 10px 15px;
+        font-size: 12px;
+        border-left: none;
     }
 
-    .nav-links .btn-cerrar-sesion {
-        padding: 6px 10px;
-        font-size: 11px;
+    .nav-item:hover, 
+    .nav-item.active,
+    .sidebar-nav a:hover, 
+    .sidebar-nav a.active {
+        border-left: none;
+        border-bottom: 3px solid #ff9100;
     }
-    
-    .menu-toggle {
-        display: none !important;
+
+    .main-wrapper {
+        margin-left: 0;
+        width: 100%;
+        padding: 15px;
+    }
+
+    .perfil-container {
+        margin-top: 20px;
+    }
+
+    .tarjeta-perfil {
+        padding: 20px;
     }
 }

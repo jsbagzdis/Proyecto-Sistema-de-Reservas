@@ -8,61 +8,59 @@
 </head>
 <body>
 
-    <nav class="navbar-planeta">
-        <div class="nav-contenedor">
+    <!-- Sidebar Lateral Izquierda -->
+    <aside class="sidebar">
+      <div class="sidebar-logo">PLANETA DEPORTE</div>
+      <nav class="sidebar-nav">
+        <a href="menu.html" class="nav-item">Inicio</a>
+        <a href="reserva.html" class="nav-item active">Reservas</a>
+        <a href="canchas.html" class="nav-item">Canchas</a>
+        <a href="perfil.html" class="nav-item">Perfil</a>
+        <a href="login.html" class="nav-item" style="color: #ff4d4d; margin-top: auto;">Cerrar Sesión</a>
+      </nav>
+    </aside>
 
-            <div class="nav-logo">
-                <img src="../Imagenes/Logo.png" alt="Logo" style="height: 100px; vertical-align: middle; margin-right: 10px;">
-                <span>Planeta Deporte</span>
-            </div>
-
-            <button class="menu-toggle" id="menuToggle">☰</button>
-
-            <div class="nav-links" id="navLinks">
-                <a href="canchas.html" id="nav-mis-canchas" style="display: none;">Mis Canchas</a>
-                <a href="mis_reservas.html">Mis Reservas</a>
-                <a href="perfil.html">Mi Perfil</a>
-                <a href="login.html" class="btn-cerrar-sesion">Cerrar Sesión</a>
-            </div>
-        </div>
-    </nav>
-
-    <div class="todo">
-        <div class="encabezado">
+    <!-- Contenido Principal Desplazado -->
+    <div class="main-wrapper">
+        
+        <header class="encabezado">
             <h1>BUSCAR TURNOS</h1>
             <p>Elegí tu deporte, la fecha y la duración para ver los horarios disponibles</p>
+        </header>
+
+        <div class="todo">
+            <form id="formularioForm">
+                <label for="deporteSelect">Seleccioná el Deporte</label>
+                <select id="deporteSelect" required>
+                    <option value="" disabled selected>Seleccione un deporte...</option>
+                    <option value="Fútbol">Fútbol</option>
+                    <option value="Básquetbol">Básquetbol</option>
+                    <option value="Pádel">Pádel</option>
+                    <option value="Tenis">Tenis</option>
+                </select>
+
+                <label for="fecha">Fecha del Partido</label>
+                <input type="date" id="fecha" required>
+
+                <label for="duracion">Duración del Turno</label>
+                <select id="duracion" required>
+                    <option value="" disabled selected>Seleccione la duración...</option>
+                    <option value="60">1 hs</option>
+                    <option value="90">1:30 hs</option>
+                    <option value="120">2 hs</option>
+                </select>
+
+                <button type="button" id="btnEnviar">Buscar Horarios Disponibles</button>
+                
+                <p id="mensaje"></p>
+            </form>
+
+            <div class="ListaReservas" id="contenedorTurnos">
+                <h2>Turnos Disponibles</h2>
+                <div id="listaHorariosLibres"></div>
+            </div>
         </div>
 
-        <form id="formularioForm">
-            <label for="deporteSelect">Seleccioná el Deporte</label>
-            <select id="deporteSelect" required>
-                <option value="" disabled selected>Seleccione un deporte...</option>
-                <option value="Fútbol">Fútbol</option>
-                <option value="Básquetbol">Básquetbol</option>
-                <option value="Pádel">Pádel</option>
-                <option value="Tenis">Tenis</option>
-            </select>
-
-            <label for="fecha">Fecha del Partido</label>
-            <input type="date" id="fecha" required>
-
-            <label for="duracion">Duración del Turno</label>
-            <select id="duracion" required>
-                <option value="" disabled selected>Seleccione la duración...</option>
-                <option value="60">1 hs</option>
-                <option value="90">1:30 hs</option>
-                <option value="120">2 hs</option>
-            </select>
-
-            <button type="button" id="btnEnviar">Buscar Horarios Disponibles</button>
-            
-            <p id="mensaje"></p>
-        </form>
-
-        <div class="ListaReservas" id="contenedorTurnos">
-            <h2>Turnos Disponibles</h2>
-            <div id="listaHorariosLibres"></div> </div>
-        </div>
     </div>
 
     <script src="../JavaScript/reserva.js"></script>

@@ -1,12 +1,99 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="../JavaScript/login.js"></script>
-    <title>Menu</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Menú - Planeta Deporte</title>
+  <link rel="stylesheet" href="../Css/menu.css">
 </head>
 <body>
-    <h1>Menú Principal</h1>
+
+  
+  <div class="header-logo">
+    <img src="../Imagenes/logo.png" alt="Logo de fondo">
+  </div>
+
+  <div class="dashboard-container">
+    
+    <!-- Sidebar-->
+    <aside class="sidebar">
+      <div class="sidebar-logo">PLANETA DEPORTE</div>
+      <nav class="sidebar-nav">
+        <a href="menu.html" class="nav-item active">Inicio</a>
+        <a href="reserva.html" class="nav-item">Reservas</a>
+        <a href="canchas.html" class="nav-item">Canchas</a>
+        <a href="perfil.html" class="nav-item">Perfil</a>
+        <a href="login.html" class="nav-item" style="color: #ff4d4d; margin-top: auto;">Cerrar Sesión</a>
+      </nav>
+    </aside>
+
+    <!-- Contenido Principal -->
+    <main class="main-content">
+      <section class="content-wrapper">
+        
+        <div>
+          <h1 class="page-title">Bienvenido a Planeta Deporte</h1>
+          <p class="page-subtitle">Descubre los beneficios y servicios que ofrecemos</p>
+        </div>
+
+        <!-- Rueda Interactivo-->
+        <div class="carousel-container">
+          <button class="nav-arrow left" id="btn-prev">&#10094;</button>
+
+          <div class="carousel-track-container">
+            <div class="carousel-track" id="carousel-track">
+              
+              <!-- Tarjeta 1-->
+              <div class="cancha-card card-item">
+                <div class="feature-icon">⏰</div>
+                <h3>Atención 24/7</h3>
+                <p>Soporte y gestión de reservas en todo momento del día.</p>
+              </div>
+
+              <!-- Tarjeta 2-->
+              <div class="cancha-card card-item">
+                <div class="feature-icon">📹</div>
+                <h3>Grabaciones de Partidos</h3>
+                <p>Reviví tus mejores jugadas. Con descargas disponibles de video de tu partido al finalizar.</p>
+              </div>
+
+              <!-- Tarjeta 3-->
+              <div class="cancha-card card-item">
+                <div class="feature-icon">⚽</div>
+                <h3>Variedad de Canchas</h3>
+                <p>Fútbol 5, 7, Pádel y Básquet con techado y césped sintético de calidad.</p>
+              </div>
+
+              <!-- Tarjeta 4-->
+              <div class="cancha-card card-item">
+                <div class="feature-icon">🏆</div>
+                <h3>Torneos y Ligas</h3>
+                <p>Inscribe a tu equipo en nuestras competiciones con grandes premios.</p>
+              </div>
+
+              <!-- Tarjeta 5-->
+              <div class="cancha-card card-item">
+                <div class="feature-icon">🍔</div>
+                <h3>Buffet y Tercer Tiempo</h3>
+                <p>Área de bar y parrillas para compartir bebidas y comidas después del juego.</p>
+              </div>
+
+            </div>
+          </div>
+
+          <button class="nav-arrow right" id="btn-next">&#10095;</button>
+        </div>
+
+        <!-- Botón Reservar  -->
+        <div class="reserve-btn-container">
+          <a href="reserva.html" class="btn-reserva-cta">¡Reserva Ahora!</a>
+        </div>
+
+      </section>
+    </main>
+
+  </div>
+
+  <script src="../JavaScript/menu.js"></script>
 </body>
 </html>

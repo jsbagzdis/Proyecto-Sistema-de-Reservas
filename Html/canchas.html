@@ -8,6 +8,10 @@
 </head>
 <body>
 
+    <div class="header-logo">
+        <img src="../Imagenes/logo.png" alt="Logo"> 
+    </div>
+
     <div class="dashboard-container">
         
         <aside class="sidebar">
@@ -17,15 +21,11 @@
                 <a href="reserva.html" class="nav-item">Reservas</a>
                 <a href="canchas.html" class="nav-item active">Canchas</a>
                 <a href="perfil.html" class="nav-item">Perfil</a>
-                <a href="login.html" class="nav-item" style="color: #ff4d4d; margin-top: auto;">Salir</a>
+                <a href="login.html" class="nav-item" style="color: #ff4d4d; margin-top: auto;">Cerrar Sesión</a>
             </nav>
         </aside>
 
         <main class="main-content">
-            <div class="header-logo">
-                <img src="../Imagenes/logo.png" alt="Logo"> 
-            </div>
-    
             <section class="content-wrapper">
                 <h1 class="page-title">PANEL DE CONTROL: MIS CANCHAS</h1>
                 <p class="page-subtitle">Agrega y administra tus canchas.</p>
@@ -41,7 +41,7 @@
                 </div>
 
                 <div id="contenedor-canchas" class="canchas-grid">
-                    </div>
+                </div>
             </section>
         </main>
     </div>
@@ -67,9 +67,9 @@
             </div>
             
             <div class="form-group">
-            <label>Deporte</label>
-            <input type="text" id="input-deporte" list="lista-deportes" placeholder="Ej: Fútbol, Padel...">
-            <datalist id="lista-deportes"></datalist>
+                <label>Deporte</label>
+                <input type="text" id="input-deporte" list="lista-deportes" placeholder="Ej: Fútbol, Padel...">
+                <datalist id="lista-deportes"></datalist>
             </div>
             
             <button class="btn-add btn-guardar-modal" id="btn-guardar-cancha">GUARDAR CANCHA</button>
@@ -77,27 +77,27 @@
     </div>
 
     <div id="modal-turnos" class="modal-overlay hidden">
-    <div class="modal-content">
-        <span class="close-btn" onclick="document.getElementById('modal-turnos').classList.add('hidden')">&times;</span>
-        <h2>Gestión de Turnos</h2>
-        <p id="titulo-cancha-turnos">Cancha: </p>
-        
-        <div id="lista-turnos" style="margin: 20px 0; max-height: 200px; overflow-y: auto;">
+        <div class="modal-content">
+            <span class="close-btn" onclick="document.getElementById('modal-turnos').classList.add('hidden')">&times;</span>
+            <h2>Gestión de Turnos</h2>
+            <p id="titulo-cancha-turnos">Cancha: </p>
+            
+            <div id="lista-turnos" style="margin: 20px 0; max-height: 200px; overflow-y: auto;">
             </div>
 
-        <hr>
-        <h3>Agregar nuevo turno</h3>
-        <div class="form-group">
-            <label>Hora de inicio</label>
-            <input type="time" id="input-nuevo-turno">
+            <hr>
+            <h3>Agregar nuevo turno</h3>
+            <div class="form-group">
+                <label>Hora de inicio</label>
+                <input type="time" id="input-nuevo-turno">
+            </div>
+            <button class="btn-add" onclick="guardarTurno()">Agregar Horario</button>
+
+            <label>Precio:</label>
+            <input type="number" id="nuevo-precio" placeholder="Ej: 5000">
+
         </div>
-        <button class="btn-add" onclick="guardarTurno()">Agregar Horario</button>
-
-        <label>Precio:</label>
-        <input type="number" id="nuevo-precio" placeholder="Ej: 5000">
-
     </div>
-</div>
 
     <script src="../JavaScript/canchas.js"></script>
 </body>

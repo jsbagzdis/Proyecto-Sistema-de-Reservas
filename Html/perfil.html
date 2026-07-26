@@ -8,52 +8,48 @@
 </head>
 <body>
 
-    <nav class="navbar-planeta">
-        <div class="nav-contenedor">
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+        <div class="sidebar-logo">PLANETA DEPORTE</div>
+        <nav class="sidebar-nav">
+            <a href="menu.html" class="nav-item">Inicio</a>
+            <a href="reserva.html" class="nav-item">Reservas</a>
+            <a href="canchas.html" class="nav-item">Canchas</a>
+            <a href="perfil.html" class="nav-item active">Perfil</a> 
+            <a href="login.html" class="nav-item" style="color: #ff4d4d; margin-top: auto;">Cerrar Sesión</a>
+        </nav>
+    </aside>
 
-            <div class="nav-logo">
-                <img src="../Imagenes/Logo.png" alt="Logo" style="height: 100px; vertical-align: middle; margin-right: 10px;">
-                <span>Planeta Deporte</span>
+    <!--Desplazamo el contenido a la derecha de la sidebar -->
+    <div class="main-wrapper">
+        <div class="perfil-container">
+            <h2>Mi Perfil</h2>
+            
+            <div class="tarjeta-perfil">
+                <div class="form-group">
+                    <label for="perfilNombre">Nombre:</label>
+                    <input type="text" id="perfilNombre" placeholder="Tu nombre">
+                </div>
+                
+                <div class="form-group">
+                    <label for="perfilUsuario">Nombre de Usuario:</label>
+                    <input type="text" id="perfilUsuario" placeholder="Tu usuario">
+                </div>
+                
+                <div class="form-group">
+                    <label for="perfilCorreo">Correo Electrónico:</label>
+                    <input type="email" id="perfilCorreo" placeholder="Tu correo">
+                </div>
+                
+                <div class="form-group">
+                    <label for="perfilTelefono">Teléfono:</label>
+                    <input type="text" id="perfilTelefono" placeholder="Ingresa tu teléfono aquí">
+                </div>
             </div>
 
-            <button class="menu-toggle" id="menuToggle">☰</button>
-
-            <div class="nav-links" id="navLinks">
-                <a href="canchas.html" id="nav-mis-canchas" style="display: none;">Mis Canchas</a>
-                <a href="reserva.html">Reservar Turno</a>
-                <a href="login.html" class="btn-cerrar-sesion">Cerrar Sesión</a>
-            </div>
-
+            <button onclick="guardarCambios()" class="btn-guardar">Guardar Cambios</button>
+            <button onclick="cerrarSesion()" class="btn-cerrar">Cerrar Sesión</button>
         </div>
-    </nav>
-
-    <div class="perfil-container">
-        <h2>Mi Perfil</h2>
-        
-        <div class="tarjeta-perfil">
-            <div class="form-group">
-                <label for="perfilNombre"><strong>Nombre:</strong></label>
-                <input type="text" id="perfilNombre" placeholder="Tu nombre">
-            </div>
-            
-            <div class="form-group">
-                <label for="perfilUsuario"><strong>Nombre de Usuario:</strong></label>
-                <input type="text" id="perfilUsuario" placeholder="Tu usuario">
-            </div>
-            
-            <div class="form-group">
-                <label for="perfilCorreo"><strong>Correo Electrónico:</strong></label>
-                <input type="email" id="perfilCorreo" placeholder="Tu correo">
-            </div>
-            
-            <div class="form-group">
-                <label for="perfilTelefono"><strong>Teléfono:</strong></label>
-                <input type="text" id="perfilTelefono" placeholder="Ingresa tu teléfono aquí">
-            </div>
-        </div>
-
-        <button onclick="guardarCambios()" class="btn-guardar">Guardar Cambios</button>
-        <button onclick="cerrarSesion()" class="btn-cerrar">Cerrar Sesión</button>
     </div>
 
     <script src="../JavaScript/perfil.js"></script> 

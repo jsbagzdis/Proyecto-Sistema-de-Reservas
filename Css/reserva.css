@@ -10,16 +10,74 @@ body {
     background-attachment: fixed;
     min-height: 100vh;
     display: flex;
-    flex-direction: column;
-    align-items: center;
 }
 
-/*ENCABEZADO Y CONTENEDOR PRINCIPAL*/
+/*  SIDEBAR  */
+.sidebar {
+    width: 250px;
+    background: rgba(10, 25, 47, 0.9);
+    color: white;
+    padding: 20px 0;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+}
+
+.sidebar-logo { 
+    text-align: center; 
+    padding: 20px; 
+    color: #ff9100; 
+    font-weight: bold; 
+    border-bottom: 1px solid rgba(255,255,255,0.1); 
+}
+
+.sidebar-nav {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.nav-item, 
+.sidebar-nav a { 
+    color: #ccc; 
+    text-decoration: none; 
+    padding: 15px 25px; 
+    display: block; 
+    transition: all 0.3s ease;
+}
+
+.nav-item:hover, 
+.nav-item.active,
+.sidebar-nav a:hover,
+.sidebar-nav a.active { 
+    background: rgba(255, 255, 255, 0.1); 
+    color: #ff9100; 
+    border-left: 4px solid #ff9100; 
+}
+
+
+/* CONTENIDO PRINCIPAL */
+.main-wrapper {
+    flex: 1;
+    margin-left: 250px; /* Desplaza el contenido para dejar espacio a la sidebar fija */
+    width: calc(100% - 250px);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+}
+
+
 .encabezado {
     width: 100%;
     background-color: transparent;
     color: rgb(255, 255, 255);
-    padding: 60px 20px;
+    padding: 40px 20px 20px 20px;
     text-align: center;
 }
 
@@ -40,10 +98,8 @@ body {
 }
 
 .todo {
-    width: 90%;
+    width: 100%;
     max-width: 500px;
-    padding-top: 100px;
-    padding-bottom: 60px;
     background: rgba(255, 255, 255, 0.15);
     backdrop-filter: blur(15px);
     -webkit-backdrop-filter: blur(15px);
@@ -51,10 +107,10 @@ body {
     border: 1px solid rgba(255, 255, 255, 0.2);
     box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
     padding: 40px;
-    margin-bottom: 40px; /* Margen extra inferior */
+    margin-bottom: 40px;
 }
 
-/* FORMULARIO*/
+
 #formularioForm {
     background: rgba(240, 240, 240, 0.95);
     padding: 35px;
@@ -140,7 +196,7 @@ input:focus, select:focus {
     border: 1px solid #dcfce7;
 }
 
-/*LISTA DE RESERVAS*/
+/* LISTA DE RESERVAS */
 .ListaReservas {
     margin-top: 45px;
     background: rgba(223, 222, 227, 0.2);
@@ -165,7 +221,7 @@ input:focus, select:focus {
     justify-content: space-between;
     align-items: center;
     border-left: 6px solid #ff9100;
-    gap: 15px; /* Separación entre info y botón */
+    gap: 15px;
 }
 
 .turno-info {
@@ -211,81 +267,7 @@ input:focus, select:focus {
     cursor: not-allowed;
 }
 
-/*  BARRA DE NAVEGACIÓN Y MENÚ RESPONSIVO */
-.navbar-planeta {
-    width: 100%;
-    background: rgba(118, 24, 24, 0.1);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    border-bottom: 1px solid rgba(168, 165, 165, 0.2);
-    position: sticky;
-    top: 0;
-    z-index: 1000;
-}
-
-.nav-contenedor {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 15px 20px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    position: relative; /* Importante para el menú móvil */
-}
-
-.nav-logo {
-    color: rgb(47, 50, 227);
-    font-weight: 800;
-    font-size: 15px;
-    letter-spacing: 1px;
-    text-transform: uppercase;
-    text-shadow: 1px 1px 3px rgba(255, 255, 255, 0.411);
-}
-
-.menu-toggle {
-    display: none; /* Oculto en PC */
-    background: none;
-    border: none;
-    color: white;
-    font-size: 28px;
-    cursor: pointer;
-    outline: none;
-}
-
-.nav-links {
-    display: flex;
-    align-items: center;
-    gap: 25px;
-}
-
-.nav-links a {
-    color: rgb(255, 255, 255);
-    text-decoration: none;
-    font-weight: 600;
-    font-size: 14px;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-    transition: color 0.3s ease;
-}
-
-.nav-links a:hover {
-    color: #130741;
-}
-
-.nav-links .btn-cerrar-sesion {
-    background-color: #db0a0a;
-    padding: 8px 16px;
-    border-radius: 8px;
-    border: 1px solid rgba(0, 0, 0, 0.532);
-    transition: background 0.3s ease;
-}
-
-.nav-links .btn-cerrar-sesion:hover {
-    background-color: #850707;
-    color: rgb(255, 255, 255);
-}
-
-/*MODAL DE RESERVA*/
+/* MODAL DE RESERVA */
 .modal-reserva {
     position: fixed;
     top: 50%;
@@ -296,7 +278,7 @@ input:focus, select:focus {
     border-radius: 15px;
     padding: 25px;
     box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.5);
-    z-index: 1000;
+    z-index: 1001;
     text-align: center;
     color: white;
     font-family: 'Poppins', sans-serif;
@@ -372,25 +354,62 @@ input:focus, select:focus {
     pointer-events: auto;
 }
 
-
+/* RESPONSIVE  */
 @media (max-width: 768px) {
-    /* Achicar la fuente del título para que no se desborde */
+    body {
+        flex-direction: column;
+    }
+
+    .sidebar {
+        width: 100%;
+        min-height: auto;
+        position: relative;
+        padding: 10px 0;
+        border-right: none;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .sidebar-nav {
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 5px;
+        margin-top: 0;
+        padding-bottom: 10px;
+    }
+
+    .nav-item,
+    .sidebar-nav a {
+        padding: 10px 15px;
+        font-size: 12px;
+        border-left: none;
+    }
+
+    .nav-item:hover, 
+    .nav-item.active,
+    .sidebar-nav a:hover, 
+    .sidebar-nav a.active {
+        border-left: none;
+        border-bottom: 3px solid #ff9100;
+    }
+
+    .main-wrapper {
+        margin-left: 0;
+        width: 100%;
+    }
+
     .encabezado h1 {
         font-size: 1.8rem;
     }
 
-    /* Reducir el padding de la tarjeta principal para aprovechar la pantalla */
     .todo {
         padding: 25px 15px; 
-        padding-top: 60px;
     }
 
-    /* Ajustar el formulario interior */
     #formularioForm {
         padding: 20px;
     }
 
-    /* Modificar las tarjetas de los turnos para que se apilen en vez de aplastarse */
     .turno-item {
         flex-direction: column;
         align-items: flex-start;
@@ -400,52 +419,11 @@ input:focus, select:focus {
     .turno-info {
         width: 100%;
         margin-bottom: 10px;
-        align-items: center; /* Centrar texto en móviles */
+        align-items: center;
     }
 
     .btnReservarItem {
-        width: 100%; /* El botón ocupa todo el ancho */
+        width: 100%;
         padding: 12px;
-    }
-
-    /* Comportamiento del Menú Hamburguesa */
-    .menu-toggle {
-        display: block;
-    }
-
-    .nav-links {
-        display: none;
-        flex-direction: column;
-        position: absolute;
-        top: 100%;
-        left: 0;
-        width: 100%;
-        background: rgba(0, 48, 73, 0.98); /* Color oscuro para legibilidad */
-        padding: 20px 0;
-        box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.4);
-        z-index: 999;
-        text-align: center;
-        border-bottom: 3px solid rgba(255, 166, 2, 1);
-        gap: 0; /* Quitamos el gap para usar paddings en su lugar */
-    }
-
-    .nav-links.active {
-        display: flex;
-    }
-
-    .nav-links a {
-        display: block;
-        width: 100%;
-        padding: 15px 0;
-        border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-    }
-
-    .nav-links a:last-child {
-        border-bottom: none;
-    }
-    
-    .nav-links .btn-cerrar-sesion {
-        margin: 10px auto;
-        width: 80%; /* Hacer el botón de cerrar sesión más amigable para el dedo */
     }
 }
