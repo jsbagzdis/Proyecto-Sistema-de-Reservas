@@ -14,6 +14,9 @@ const { Turno } = require("./Modelos/modelosExport");
 Deporte.hasMany(Cancha, { foreignKey: "DeporteId" });
 Cancha.belongsTo(Deporte, { foreignKey: "DeporteId" });
 
+Usuario.hasMany(Cancha, { foreignKey: "UsuarioId" });
+Cancha.belongsTo(Usuario, { foreignKey: "UsuarioId" });
+
 // Un usuario puede tener muchas reservas / Una reserva pertenece a un usuario
 Usuario.hasMany(Reserva, { foreignKey: "UsuarioId" });
 Reserva.belongsTo(Usuario, { foreignKey: "UsuarioId" });
@@ -37,8 +40,19 @@ conectarDB
   .then(async () => {
     console.log("Conexión establecida.");
 
-    await sequelize.sync({ alter: true });
-    console.log("Todas las tablas e índices sincronizados correctamente de forma global.");
+    await sequelize.sync();
+    const [column] = await sequelize.query(
+      "SHOW COLUMNS FROM Usuarios LIKE 'apellido';",
+    );
+    if (column.length === 0) {
+      await sequelize.query(
+        "ALTER TABLE Usuarios ADD COLUMN apellido VARCHAR(255) NULL;",
+      );
+      console.log("Columna apellido agregada a Usuarios.");
+    }
+    console.log(
+      "Todas las tablas se sincronizaron correctamente (sin alteraciones automáticas).",
+    );
   })
   .catch((err) => {
     console.error("Error al sincronizar:", err);

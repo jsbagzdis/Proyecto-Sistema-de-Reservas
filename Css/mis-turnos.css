@@ -158,8 +158,54 @@ body {
     border: 1px solid rgba(239, 68, 68, 0.35);
 }
 
-/* Botón cancelar */
-.btn-cancelar {
+.badge-terminada {
+    background: rgba(34, 197, 94, 0.12);
+    color: #166534;
+    border: 1px solid rgba(34, 197, 94, 0.35);
+}
+
+/* Botones de acción */
+.btn-cancelar,
+.btn-accion {
+    background: transparent;
+    color: #0f172a;
+    border: 1px solid #0f172a;
+    padding: 8px 14px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 0.85rem;
+    font-weight: 600;
+    transition: all 0.2s ease;
+}
+
+.btn-cancelar:hover,
+.btn-accion:hover {
+    background: #0f172a;
+    color: white;
+    transform: translateY(-1px);
+}
+
+.btn-aceptar {
+    border-color: #16a34a;
+    color: #16a34a;
+}
+
+.btn-aceptar:hover {
+    background: #16a34a;
+}
+
+.btn-terminada {
+    border-color: #0ea5e9;
+    color: #0ea5e9;
+}
+
+.btn-terminada:hover {
+    background: #0ea5e9;
+}
+
+.btn-accion {
+    margin-right: 8px;
+}
     background: transparent;
     color: #dc2626;
     border: 1px solid #dc2626;
