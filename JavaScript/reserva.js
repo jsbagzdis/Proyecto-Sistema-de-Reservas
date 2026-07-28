@@ -7,13 +7,6 @@ document.addEventListener("DOMContentLoaded", () => {
         const usuario = JSON.parse(usuarioString);
         USUARIO_ID_LOGUEADO = usuario.id;
         console.log("Datos del usuario:", usuario);
-
-        if (usuario.rol === 'admin' || usuario.rol === 'administrador') {
-            const navMisCanchas = document.getElementById('nav-mis-canchas');
-            if (navMisCanchas) {
-                navMisCanchas.style.display = 'inline-block'; 
-            }
-        }
     } else {
         alert("Debes iniciar sesión para reservar.");
         window.location.href = "login.html";

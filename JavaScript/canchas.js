@@ -2,7 +2,32 @@ const API_URL = 'http://localhost:3000/api';
 let todasLasCanchas = []; 
 let canchaSeleccionadaId = null;
 
+function esAdministrador(usuario) {
+    return usuario.rol === 'admin' || usuario.rol === 'administrador';
+}
+
 document.addEventListener('DOMContentLoaded', () => {
+    const usuarioString = localStorage.getItem('usuarioLogueado');
+
+    if (!usuarioString) {
+        alert('Debes iniciar sesión para acceder a esta sección.');
+        window.location.href = 'login.html';
+        return;
+    }
+
+    const usuario = JSON.parse(usuarioString);
+
+    if (!esAdministrador(usuario)) {
+        alert('No tenés permiso para acceder a la gestión de canchas.');
+        window.location.href = 'menu.html';
+        return;
+    }
+
+    const navCanchas = document.getElementById('nav-canchas');
+    if (navCanchas) {
+        navCanchas.style.display = 'block';
+    }
+
     cargarCanchas();
     cargarDeportes();
 

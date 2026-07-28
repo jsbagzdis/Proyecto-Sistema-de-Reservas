@@ -29,9 +29,20 @@ const Reserva = sequelize.define('Reserva', {
     validate: {
       isIn: [['pendiente', 'confirmada', 'cancelada']]
     }
+  },
+  UsuarioId: {
+    type: DataTypes.INTEGER,
+    allowNull: false,
+    references: { model: 'Usuarios', key: 'id' }
+  },
+  CanchaId: {
+    type: DataTypes.INTEGER,
+    allowNull: false,
+    references: { model: 'Canchas', key: 'id' }
   }
-}, { 
-  timestamps: true // Esto crea automáticamente createdAt y updatedAt en MySQL
+}, {
+  timestamps: true,
+  tableName: 'reservas'
 });
 
 module.exports = Reserva;

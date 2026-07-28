@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mis Turnos - Planeta Deporte</title>
+  <link rel="stylesheet" href="../Css/mis-turnos.css">
+</head>
+<body>
+
+  <div class="header-logo">
+    <img src="../Imagenes/logo.png" alt="Logo de fondo">
+  </div>
+
+  <div class="dashboard-container">
+
+    <aside class="sidebar">
+      <div class="sidebar-logo">PLANETA DEPORTE</div>
+      <nav class="sidebar-nav">
+        <a href="menu.html" class="nav-item">Inicio</a>
+        <a href="reserva.html" class="nav-item">Reservas</a>
+        <a href="mis-turnos.html" class="nav-item active">Mis Turnos</a>
+        <a href="canchas.html" id="nav-canchas" class="nav-item" style="display: none;">Canchas</a>
+        <a href="perfil.html" class="nav-item">Perfil</a>
+        <a href="login.html" class="nav-item" style="color: #ff4d4d; margin-top: auto;">Cerrar Sesión</a>
+      </nav>
+    </aside>
+
+    <main class="main-content">
+      <section class="content-wrapper">
+
+        <div class="page-header">
+          <h1 class="page-title">Mis Turnos</h1>
+          <p class="page-subtitle">Historial de tus reservas, ordenadas de la más reciente a la más antigua</p>
+        </div>
+
+        <div class="turnos-panel">
+          <div id="mensaje-vacio" class="mensaje-vacio hidden">
+            No tenés reservas registradas todavía.
+            <a href="reserva.html" class="link-reservar">Reservar un turno</a>
+          </div>
+
+          <div class="table-responsive">
+            <table class="turnos-table" id="tabla-turnos">
+              <thead>
+                <tr>
+                  <th>Cancha</th>
+                  <th>Deporte</th>
+                  <th>Fecha</th>
+                  <th>Horario</th>
+                  <th>Duración</th>
+                  <th>Estado</th>
+                  <th>Acciones</th>
+                </tr>
+              </thead>
+              <tbody id="cuerpo-tabla-turnos">
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+      </section>
+    </main>
+
+  </div>
+
+  <script src="../JavaScript/sidebar.js"></script>
+  <script src="../JavaScript/mis-turnos.js"></script>
+</body>
+</html>

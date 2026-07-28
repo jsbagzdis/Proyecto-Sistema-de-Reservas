@@ -5,14 +5,6 @@ document.addEventListener("DOMContentLoaded", function() {
      if (datosSesion) {
         const usuario = JSON.parse(datosSesion);
         console.log("Datos del usuario en localStorage:", usuario);
-
-        if (usuario.rol === 'admin' || usuario.rol === 'administrador') {
-        const navMisCanchas = document.getElementById('nav-mis-canchas');
-
-        if (navMisCanchas) {
-                navMisCanchas.style.display = 'inline-block'; 
-            }
-        }
     }
 
 
@@ -32,7 +24,6 @@ document.addEventListener("DOMContentLoaded", function() {
     document.getElementById("perfilUsuario").value = usuario.usuario || "";
     document.getElementById("perfilCorreo").value = usuario.email || "";
 
-    r
     if (usuario.telefono === "000000000" || !usuario.telefono) {
         document.getElementById("perfilTelefono").value = ""; 
     } else {

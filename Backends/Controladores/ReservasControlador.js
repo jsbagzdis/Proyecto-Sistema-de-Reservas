@@ -134,3 +134,82 @@ exports.obtenerTurnosDisponibles = async (req, res) => {
         res.status(500).json({ msg: 'Hubo un error al procesar los horarios disponibles.' });
     }
 };
+
+// Obtener reservas de un usuario (vista "Mis Turnos")
+exports.obtenerReservasPorUsuario = async (req, res) => {
+    try {
+        const { usuarioId } = req.params;
+
+        if (!usuarioId) {
+            return res.status(400).json({ msg: 'Debes indicar el ID del usuario.' });
+        }
+
+        const reservas = await Reserva.findAll({
+            where: { UsuarioId: usuarioId },
+            include: [
+                { model: Cancha, attributes: ['id', 'nombre', 'ubicacion'] }
+            ],
+            order: [
+                ['fecha', 'DESC'],
+                ['horario', 'DESC']
+            ]
+        });
+
+        const reservasFormateadas = reservas.map((reserva) => ({
+            id: reserva.id,
+            cancha: reserva.Cancha ? reserva.Cancha.nombre : 'Cancha no disponible',
+            ubicacion: reserva.Cancha ? reserva.Cancha.ubicacion : null,
+            deporte: reserva.deporte,
+            fecha: reserva.fecha,
+            horario: reserva.horario ? reserva.horario.substring(0, 5) : '',
+            duracion: reserva.duracion,
+            estado: reserva.estado,
+            UsuarioId: reserva.UsuarioId,
+            CanchaId: reserva.CanchaId
+        }));
+
+        res.json(reservasFormateadas);
+    } catch (error) {
+        console.error('Error al obtener reservas del usuario:', error);
+        res.status(500).json({ msg: 'Hubo un error al obtener tus turnos.' });
+    }
+};
+
+// Cancelar una reserva (solo el dueño y si no está ya cancelada)
+exports.cancelarReserva = async (req, res) => {
+    try {
+        const { id } = req.params;
+        const { UsuarioId } = req.body;
+
+        if (!UsuarioId) {
+            return res.status(400).json({ msg: 'Debes indicar el usuario que cancela la reserva.' });
+        }
+
+        const reserva = await Reserva.findByPk(id);
+
+        if (!reserva) {
+            return res.status(404).json({ msg: 'La reserva no existe.' });
+        }
+
+        if (String(reserva.UsuarioId) !== String(UsuarioId)) {
+            return res.status(403).json({ msg: 'No tenés permiso para cancelar esta reserva.' });
+        }
+
+        if (reserva.estado === 'cancelada') {
+            return res.status(400).json({ msg: 'Esta reserva ya fue cancelada.' });
+        }
+
+        await reserva.update({ estado: 'cancelada' });
+
+        res.json({
+            msg: 'Reserva cancelada con éxito.',
+            reserva: {
+                id: reserva.id,
+                estado: reserva.estado
+            }
+        });
+    } catch (error) {
+        console.error('Error al cancelar reserva:', error);
+        res.status(500).json({ msg: 'Hubo un error al cancelar la reserva.' });
+    }
+};
